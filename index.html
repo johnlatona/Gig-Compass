@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,21 +7,20 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVE0YZTBYmeFwStCIUt8mMgyfL7tLYYhU&callback=initGoogleMap"></script>
-
 	<script type="text/javascript" src="app.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 </head>
 <body>
 
 	<div class="page-header">
 		<h1>Gig Compass</h1>
 	</div>
-	
+
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -31,18 +29,27 @@
 
 			<form class="navbar-form navbar-left" role="search">
 				<div class="form-group form-group-sm">
-					<label>Search: </label>
-					<input type="text" class="form-control" id="search-input" placeholder="Search">
-					<select name="eventType" class="form-control" id="eventType-input">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-search"></span> 
+						</div>
+						<input type="text" class="form-control" id="search-input" placeholder="What are you looking for?">
+					</div>
+
+					<select name="eventType" class="form-control selectpicker" id="eventType-input">
+						<option value="" disabled selected hidden="">Categories</option>
 						<option value="music">Music</option>
 						<option value="sports">Sports</option>
+						<option><span class="glyphicon glyphicon-search"></span>Sports</option>
+						<option data-thumbnail="sports.jpg">Sports</option>
 						<option value="family">Family</option>
 						<option value="arts-theater">Arts &amp; Theater</option>
 					</select>
 					<label>City: </label>
 					<input type="text" class="form-control" id="city-input" placeholder="City">
 					<label>State: </label>
-					<select name="statee" class="form-control" id="state-input">
+					<select name="state" class="form-control" id="state-input" placeholder="State">
+						<option value="" disabled selected hidden="">State</option>
 						<option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>
 						<option value="AZ">Arizona</option>
@@ -110,6 +117,8 @@
 </div>
 
 
+
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6" id="event-list">
@@ -123,8 +132,8 @@
 				</div>
 				<div class="col-md-6">
 					<div id="map">
-						
-						
+
+
 					</div>
 				</div>
 			</div>
@@ -132,4 +141,4 @@
 
 
 	</body>
-</html>
+	</html>
