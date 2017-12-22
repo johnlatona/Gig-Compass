@@ -1,3 +1,19 @@
+	var locations =[];
+
+ 	function initGoogleMap() {
+		var map = new google.maps.Map(document.getElementById("map"), {
+			zoom: 15,
+			center: locations[0]
+		})
+
+		for (var k = 0; k < locations.length; k++) {
+			var marker = new google.maps.Marker({
+				position: locations[k],
+				map: map
+			});						
+		}			
+	};
+
 $(document).ready(function(){
 
  $("#submit").on("click", function(event) {
@@ -17,7 +33,7 @@ $(document).ready(function(){
 	var apiKey = "RElm0QfyEntLwlAvZwiZBD5GExqBRGIO"
 
 	// zip code for NY, needs to be changed to the user input
-	var zipCode = "&postalCode=10002";
+	var zipCode = "&postalCode=" + zipInput;
 
 	var keyword = "&keyword=" + searchInput; //user keyword from dropdown
 
@@ -37,31 +53,18 @@ $(document).ready(function(){
 			success: function(json) {
 				console.log(json);
 
-				var events = json.embedded.events;
-				var locations = [];
+				var events = json._embedded.events;
 
 				for (var i = 0; i < events.length; i++) {
-					var venues = events[i].embedded.venues;
+					var venues = events[i]._embedded.venues;
 					for(var j = 0; j < venues.length; j++) {
-						locations.push(venues[j].location);
+						var latLong = {lat: +venues[j].location.latitude, long: +venues[j].location.longitude};
+						locations.push(latLong);
 					}
 				}
 
-				console.log(location)
+				console.log(locations)
 
-				function initGoogleMap() {
-					var map = new google.maps.Map(document.getElementById("map"), {
-						zoom: 15,
-						center: locations[0]
-					})
-
-					for (var k = 0; k < locations.length; k++) {
-						var marker = new google.maps.Marker({
-							position: locations[k],
-							map: map
-						});						
-					}			
-				}
               // Parse the response.
               // Do other things.
           },
@@ -71,6 +74,6 @@ $(document).ready(function(){
       });
 
 	});
-
 });
+
 
