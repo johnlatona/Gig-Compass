@@ -32,8 +32,14 @@ $(document).ready(function(){
 		locations = [];
 	}
 
+	function clearEvents(){
+		$("#event-list").empty();
+	}
+
  $("#submit").on("click", function(event) {
  	clearLocations();
+
+ 	clearEvents();
 
  	event.preventDefault();
     var searchInput = $("#search-input").val();
