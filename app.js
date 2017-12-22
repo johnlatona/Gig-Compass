@@ -12,12 +12,16 @@ $(document).ready(function(){
 	console.log("eventInput" + eventInput)
 	
 	var cityInput = $("#city-input").val();
-	var stateInput = $("#state-input").val();
+	//&stateCode=il //&city=chicago
+	var stateInput = $('#state-input').find(":selected").attr("value");
 	var zipInput = $("#zip-input").val();
 	var radiusInput = $("#radius-input").val();
 
 
 	var apiKey = "RElm0QfyEntLwlAvZwiZBD5GExqBRGIO"
+
+	var city = "&city=" + cityInput;
+	var state = "&stateCode=" + stateInput;
 
 	var zipCode = "&postalCode=" + zipInput;
 
@@ -27,8 +31,7 @@ $(document).ready(function(){
 
 	var classificationName = "&classificationName=" + eventInput;
 
-	var queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + keyword + classificationName;
-
+	var queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName;
 
 
 	var apikey  = "RElm0QfyEntLwlAvZwiZBD5GExqBRGIO";
@@ -42,6 +45,7 @@ $(document).ready(function(){
 			dataType: "json",
 			success: function(json) {
 				console.log(json);
+				console.log("queryUrl" + queryUrl);
               // Parse the response.
               // Do other things.
           },
