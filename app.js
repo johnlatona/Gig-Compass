@@ -44,7 +44,7 @@ $(document).ready(function(){
  	event.preventDefault();
     var searchInput = $("#search-input").val();
     // value from dropdown
-    var eventInput = $('#eventType-input').find(":selected").text();
+    var eventInput = $('#eventType-input').find(":selected").attr("value");
     console.log("eventInput" + eventInput)
     
     var cityInput = $("#city-input").val();
@@ -59,6 +59,7 @@ $(document).ready(function(){
     var keyword = "&keyword=" + searchInput; 
     var radius = "&radius=" + radiusInput; 
     var classificationName = "&classificationName=" + eventInput;
+   
     var queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName;
 
 
@@ -106,42 +107,42 @@ $(document).ready(function(){
         //display the information
 				events = json._embedded.events;
 
-				for (var i = 0; i < events.length; i++) {
+				for (var m = 0; m < events.length; m++) {
 
-					console.log("event name:" + events[i].name);
-					console.log("date and time: " + events[i].dates.start.localDate + " " + events[i].dates.start.localTime)
-					console.log("venue: " + events[i]._embedded.venues[0].name)
-					console.log("Address: " + events[i]._embedded.venues[0].address.line1)
-					console.log(events[i]._embedded.venues[0].city.name + ", " + 
-					events[i]._embedded.venues[0].state.stateCode + " " +
-					events[i]._embedded.venues[0].postalCode )
-					console.log("url: " + events[i].url )
+					console.log("event name:" + events[m].name);
+					console.log("date and time: " + events[m].dates.start.localDate + " " + events[m].dates.start.localTime)
+					console.log("venue: " + events[m]._embedded.venues[0].name)
+					console.log("Address: " + events[m]._embedded.venues[0].address.line1)
+					console.log(events[m]._embedded.venues[0].city.name + ", " + 
+					events[m]._embedded.venues[0].state.stateCode + " " +
+					events[m]._embedded.venues[0].postalCode )
+					console.log("url: " + events[m].url )
 
 					var eventDisplay = $("<div>").addClass("event");
 
 					var eventUrl = $("<a>").addClass("event-link");
-					eventUrl.attr("href", events[i].url)
+					eventUrl.attr("href", events[m].url)
 					eventUrl.attr("target", "_blank")
 					
 					var eventName = $("<span>").addClass("name-display");
-					eventName.append(events[i].name);
+					eventName.append(events[m].name);
 					eventUrl.append(eventName);
 
 					var par = $("<p>");
 
 					var eventDate = $("<span>").addClass("date-display");
-					eventDate.append(events[i].dates.start.localDate + " " + events[i].dates.start.localTime);
+					eventDate.append(events[m].dates.start.localDate + " " + events[m].dates.start.localTime);
 
 					var eventVenue = $("<span>").addClass("venue-display");
-					eventName.append("venue: "+ events[i]._embedded.venues[0].name);
+					eventVenue.append("<br>"+ events[m]._embedded.venues[0].name);
 
 					var eventAddress = $("<span>").addClass("venu-address1-display");
-					eventAddress.append(events[i]._embedded.venues[0].address.line1);
+					eventAddress.append("<br>" + events[m]._embedded.venues[0].address.line1);
 					
 					var eventCity = $("<span>").addClass("venue-city-display");
-					eventCity.append(events[i]._embedded.venues[0].city.name + ", " + 
-					events[i]._embedded.venues[0].state.stateCode + " " +
-					events[i]._embedded.venues[0].postalCode);
+					eventCity.append("<br>" + events[m]._embedded.venues[0].city.name + ", " + 
+					events[m]._embedded.venues[0].state.stateCode + " " +
+					events[m]._embedded.venues[0].postalCode);
 
 					par.append(eventDate, eventVenue, eventAddress, eventCity);
 					eventDisplay.append(eventUrl, par);
@@ -149,14 +150,16 @@ $(document).ready(function(){
 					$("#event-list").append(eventDisplay);
 
 
-
-
-					// eventDisplay.append(events[i].dates.start.localDate + " " + events[i].dates.start.localTime);
-					// eventDisplay.append("venue: "  +events[i]._embedded.venues[0].name);
-					// eventDisplay.append("Address: " + events[i]._embedded.venues[0].address.line1);
-					// eventDisplay.append(events[i]._embedded.venues[0].city.name + ", " + 
-					// events[i]._embedded.venues[0].state.stateCode + " " +
-					// events[i]._embedded.venues[0].postalCode)
+				// console.log(moment(events[m].dates.start.localDate).format("dddd"));
+				console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
+				var time = events[m].dates.start.localTime;
+				console.log(moment(time, "HH:mm a"));
+					// eventDisplay.append(events[m].dates.start.localDate + " " + events[m].dates.start.localTime);
+					// eventDisplay.append("venue: "  +events[m]._embedded.venues[0].name);
+					// eventDisplay.append("Address: " + events[m]._embedded.venues[0].address.line1);
+					// eventDisplay.append(events[m]._embedded.venues[0].city.name + ", " + 
+					// events[m]._embedded.venues[0].state.stateCode + " " +
+					// events[m]._embedded.venues[0].postalCode)
 
 
 
