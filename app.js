@@ -131,7 +131,8 @@ $(document).ready(function(){
 					var par = $("<p>");
 
 					var eventDate = $("<span>").addClass("date-display");
-					eventDate.append(events[m].dates.start.localDate + " " + events[m].dates.start.localTime);
+					var formattedDate = (moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
+					eventDate.append(formattedDate + " " + events[m].dates.start.localTime);
 
 					var eventVenue = $("<span>").addClass("venue-display");
 					eventVenue.append("<br>"+ events[m]._embedded.venues[0].name);
@@ -145,7 +146,10 @@ $(document).ready(function(){
 					events[m]._embedded.venues[0].postalCode);
 
 					par.append(eventDate, eventVenue, eventAddress, eventCity);
-					eventDisplay.append(eventUrl, par);
+					par.addClass("par-display");
+					var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
+					eventPic.addClass("image-display");
+					eventDisplay.append(eventUrl, par, eventPic);
 
 					$("#event-list").append(eventDisplay);
 
@@ -153,7 +157,12 @@ $(document).ready(function(){
 				// console.log(moment(events[m].dates.start.localDate).format("dddd"));
 				console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
 				var time = events[m].dates.start.localTime;
+				console.log(moment.parseZone(time)._i);
+				console.log("time: " + time)
 				console.log(moment(time, "HH:mm a"));
+
+
+
 					// eventDisplay.append(events[m].dates.start.localDate + " " + events[m].dates.start.localTime);
 					// eventDisplay.append("venue: "  +events[m]._embedded.venues[0].name);
 					// eventDisplay.append("Address: " + events[m]._embedded.venues[0].address.line1);
