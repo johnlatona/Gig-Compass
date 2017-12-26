@@ -3,3 +3,11 @@
 	height: 400px;
 	background-color: grey;
 }
+
+.par-display{
+	/*float:left;*/
+}
+.image-display{
+	/*clear:both;*/
+	height:100px;
+}
