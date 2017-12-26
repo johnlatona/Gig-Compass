@@ -11,3 +11,45 @@
 	/*clear:both;*/
 	height:100px;
 }
+
+select:invalid { 
+	color: gray; 
+}
+
+ .blue-container {
+    background-color: blue;
+  }
+
+  .nav-wrapper {
+  	font-family: 'Prompt', sans-serif;
+  }
+
+.modal-form-row {
+  margin-bottom: 0px;
+}
+
+.input-fieldn {
+	font-family: 'Prompt', sans-serif;
+	margin-top: 20px;
+}
+
+#modal-location {
+  position:relative;
+  margin:0px;
+  padding: 0px;
+  top: 0px !important;
+  left: 1040px;
+  border-radius:1px;
+  width: 15% !important ; 
+  height: 65% !important ;
+}
+
+input[type='range']
+{
+    padding-top: 28px;
+}
+
+#form-location {
+	margin: 0px;
+}
+
