@@ -134,7 +134,9 @@ $(document).ready(function(){
 
 						var eventDate = $("<span>").addClass("date-display");
 						var formattedDate = (moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
-						eventDate.append(formattedDate + " " + events[m].dates.start.localTime);
+						var time = events[m].dates.start.localTime;
+						var convertedTime = moment(time, "HH:mm:ss")
+						eventDate.append(formattedDate + " " + moment(convertedTime).format("h:mm A"));
 
 						var eventVenue = $("<span>").addClass("venue-display");
 						eventVenue.append("<br>"+ events[m]._embedded.venues[0].name);
@@ -161,10 +163,12 @@ $(document).ready(function(){
 
 						// console.log(moment(events[m].dates.start.localDate).format("dddd"));
 						console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
-						var time = events[m].dates.start.localTime;
-						console.log(moment.parseZone(time)._i);
-						console.log("time: " + time)
-						console.log(moment(time, "HH:mm a"));
+						console.log(moment(time, "HH:mm:ss"))
+						console.log(moment(convertedTime).format("h:mm A"))
+
+
+
+						
 
 					}
 
