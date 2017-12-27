@@ -183,5 +183,3 @@ $(document).ready(function(){
 		 console.log("locations: " + [locations])
 	});
 });
-
-
