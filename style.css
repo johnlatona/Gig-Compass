@@ -16,7 +16,7 @@ select:invalid {
 	color: gray; 
 }
 
-body {
+* {
 	font-family: 'Prompt', sans-serif;
 }
 
@@ -44,8 +44,8 @@ body {
   top: 64px !important;
   left: 1040px;
   border-radius:1px;
-  width: 15% !important ; 
-  height: 45% !important ;
+  width: 18% !important ; 
+  height: 34% !important ;
 }
 
 #modal-daterange {
@@ -75,8 +75,9 @@ input[type='range']
     padding-top: 28px;
 }
 
-#form-location #form-daterange {
-	margin: 0px;
+#form-location, 
+#form-daterange {
+	margin: 0px !important;
 }
 
 #form-daterange {
@@ -103,4 +104,20 @@ nav a:visited,
 nav a:link{ 
 	color: white;   
 	text-decoration: none;
+}
+
+#zip-input,
+#radius-input{
+	width: 80px;
+
+}
+
+#city-input,
+#zip-input
+ {
+	margin: 0px;
+}
+
+ #radius-input {
+  margin-bottom: 0px;
 }

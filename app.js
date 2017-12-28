@@ -78,7 +78,8 @@ $(document).ready(function(){
 		searchObj.city = $("#city-input").val();
 
 		// state
-		searchObj.state = $("#state-input option:selected").val();
+		searchObj.state = $("#state-input").val();
+		searchObj.state = getStateCode(searchObj.state);
 
 		// zip
 		searchObj.zip = $("#zip-input").val();
@@ -99,21 +100,182 @@ $(document).ready(function(){
 	function getCategory(categoryValue) {
 		switch(categoryValue) {
 			case 100:
-			return "music";
-			break;
+				return "music";
+				break;
 			case 200:
-			return "sports"
-			break;
+				return "sports"
+				break;
 			case 300:
-			return "family";
-			break;
+				return "family";
+				break;
 			case 400:
-			return "arts-theater"
-			break;
+				return "arts-theater"
+				break;
 			default:
-			return "";
+				return "";
 		}
 	} // getCategory
+
+	function getStateCode(state) {
+		switch(state) {
+			case "Alabama":
+				return "AL";
+				break;
+			case "Alaska":
+				return "AK";
+				break;
+			case "Arizona":
+				return "AZ";
+				break;
+			case "Arkansas":
+				return "AR";
+				break;
+			case "California":
+				return "CA";
+				break;
+			case "Colorado":
+				return "CO";
+				break;
+			case "Connecticut":
+				return "CT";
+				break;
+			case "Delaware":
+				return "DE";
+				break;
+			case "District Of Columbia":
+				return "DC";
+				break;
+			case "Florida":
+				return "FL";
+				break;
+			case "Georgia":
+				return "GA";
+				break;
+			case "Hawaii":
+				return "HI";
+				break;
+			case "Idaho":
+				return "ID";
+				break;
+			case "Illinois":
+				return "IL";
+				break;
+			case "Indiana":
+				return "IN";
+				break;
+			case "Iowa":
+				return "IA";
+				break;
+			case "Kansas":
+				return "KS";
+				break;
+			case "Kentucky":
+				return "KY";
+				break;
+			case "Louisiana":
+				return "LA";
+				break;
+			case "Maine":
+				return "ME";
+				break;
+			case "Maryland":
+				return "MD";
+				break;
+			case "Massachusetts":
+				return "MA";
+				break;
+			case "Michigan":
+				return "MI";
+				break;
+			case "Minnesota":
+				return "MN";
+				break;
+			case "Mississippi":
+				return "MS";
+				break;
+			case "Missouri":
+				return "MO";
+				break;
+			case "Montana":
+				return "MT";
+				break;
+			case "Nebraska":
+				return "NE";
+				break;
+			case "Nevada":
+				return "AL";
+				break;
+			case "New Hampshire":
+				return "NH";
+				break;
+			case "New Jersey":
+				return "NJ";
+				break;
+			case "New Mexico":
+				return "NM";
+				break;
+			case "New York":
+				return "NY";
+				break;
+			case "North Carolina":
+				return "NC";
+				break;
+			case "North Dakota":
+				return "ND";
+				break;
+			case "Ohio":
+				return "OH";
+				break;
+			case "Oklahoma":
+				return "OK";
+				break;
+			case "Oregon":
+				return "OR";
+				break;
+			case "Pennsylvania":
+				return "PA";
+				break;
+			case "Rhode Island":
+				return "RI";
+				break;
+			case "South Carolina":
+				return "SC";
+				break;
+			case "South Dakota":
+				return "SD";
+				break;
+			case "Tennessee":
+				return "TN";
+				break;
+			case "Texas":
+				return "TX";
+				break;
+			case "Utah":
+				return "UT";
+				break;
+			case "Vermont":
+				return "VT";
+				break;
+			case "Virginia":
+				return "VA";
+				break;
+			case "Washington":
+				return "WA";
+				break;
+			case "West Virginia":
+				return "WV";
+				break;
+			case "Wisconsin":
+				return "WI";
+				break;
+			case "Wyoming":
+				return "WY";
+				break;
+			default:
+				return "";			
+		}
+	}
+
 
 	function clearLocations() {
 		locations = [];
@@ -379,6 +541,65 @@ $(document).ready(function(){
   	});
 
 
+  	// auto complete for state input
+
+  	 $(function() {
+  		$('#state-input').autocomplete({
+   		 data: {
+			"Alabama" : null,
+			"Alaska" : null,
+			"Arizona" : null,
+			"Arkansas" : null,
+			"California" : null,
+			"Colorado" : null,
+			"Connecticut" : null,
+			"Delaware" : null,
+			"District Of Columbia" : null,
+			"Florida" : null,
+			"Georgia" : null,
+			"Hawaii" : null,
+			"Idaho" : null,
+			"Illinois" : null,
+			"Indiana" : null,
+			"Iowa" : null,
+			"Kansas" : null,
+			"Kentucky" : null,
+			"Louisiana" : null,
+			"Maine" : null,
+			"Maryland" : null,
+			"Massachusetts" : null,
+			"Michigan" : null,
+			"Minnesota" : null,
+			"Mississippi" : null,
+			"Missouri" : null,
+			"Montana" : null,
+			"Nebraska" : null,
+			"Nevada" : null,
+			"New Hampshire" : null,
+			"New Jersey" : null,
+			"New Mexico" : null,
+			"New York" : null,
+			"North Carolina" : null,
+			"North Dakota" : null,
+			"Ohio" : null,
+			"Oklahoma" : null,
+			"Oregon" : null,
+			"Pennsylvania" : null,
+			"Rhode Island" : null,
+			"South Carolina" : null,
+			"South Dakota" : null,
+			"Tennessee" : null,
+			"Texas" : null,
+			"Utah" : null,
+			"Vermont" : null,
+			"Virginia" : null,
+			"Washington" : null,
+			"West Virginia" : null,
+			"Wisconsin" : null,
+			"Wyoming" : null
+    		}
+  		});
+	}); 
 
 
 
