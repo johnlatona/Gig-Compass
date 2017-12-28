@@ -4143,7 +4143,7 @@ if (Vel) {
      * @param {number} right
      * @param {number} bottom
      * @param {number} left
-     * @return {jQuery}   A collection of elements
+     * @return {jQuery}		A collection of elements
      */
   };function findElements(top, right, bottom, left) {
     var hits = $();
@@ -4216,13 +4216,13 @@ if (Vel) {
   /**
    * Enables ScrollSpy using a selector
    * @param {jQuery|string} selector  The elements collection, or a selector
-   * @param {Object=} options Optional.
+   * @param {Object=} options	Optional.
          throttle : number -> scrollspy throttling. Default: 100 ms
          offsetTop : number -> offset from top. Default: 0
          offsetRight : number -> offset from right. Default: 0
          offsetBottom : number -> offset from bottom. Default: 0
          offsetLeft : number -> offset from left. Default: 0
-        activeClass : string -> Class name to be added to the active link. Default: active
+  			activeClass : string -> Class name to be added to the active link. Default: active
    * @returns {jQuery}
    */
   $.scrollSpy = function (selector, options) {
@@ -4313,8 +4313,8 @@ if (Vel) {
 
   /**
    * Listen for window resize events
-   * @param {Object=} options           Optional. Set { throttle: number } to change throttling. Default: 100 ms
-   * @returns {jQuery}    $(window)
+   * @param {Object=} options						Optional. Set { throttle: number } to change throttling. Default: 100 ms
+   * @returns {jQuery}		$(window)
    */
   $.winSizeSpy = function (options) {
     $.winSizeSpy = function () {
@@ -4329,12 +4329,12 @@ if (Vel) {
   /**
    * Enables ScrollSpy on a collection of elements
    * e.g. $('.scrollSpy').scrollSpy()
-   * @param {Object=} options Optional.
-                      throttle : number -> scrollspy throttling. Default: 100 ms
-                      offsetTop : number -> offset from top. Default: 0
-                      offsetRight : number -> offset from right. Default: 0
-                      offsetBottom : number -> offset from bottom. Default: 0
-                      offsetLeft : number -> offset from left. Default: 0
+   * @param {Object=} options	Optional.
+  										throttle : number -> scrollspy throttling. Default: 100 ms
+  										offsetTop : number -> offset from top. Default: 0
+  										offsetRight : number -> offset from right. Default: 0
+  										offsetBottom : number -> offset from bottom. Default: 0
+  										offsetLeft : number -> offset from left. Default: 0
    * @returns {jQuery}
    */
   $.fn.scrollSpy = function (options) {

@@ -25,6 +25,21 @@
 
 $(document).ready(function(){
 
+   	$('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%', // Ending top style attribute
+      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+        alert("Ready");
+        console.log(modal, trigger);
+      },
+      complete: function() { alert('Closed'); } // Callback for Modal close
+    }
+  );
+
 	var string = "1.6525625";
 	var number = parseFloat(string);
 
@@ -122,12 +137,13 @@ $(document).ready(function(){
 
 						var eventDisplay = $("<div>").addClass("event");
 
-						var eventPopUpLink = $("<a>").addClass("modal-trigger");
-						eventPopUpLink.attr("href", "#modal" + m);
+						eventDisplay.attr("modal-id", "#modal" + m)
+
+						var eventTitle = $("<h5>");
 
 						var eventName = $("<span>").addClass("name-display");
 						eventName.append(events[m].name);
-						eventPopUpLink.append(eventName);
+						eventTitle.append(eventName);
 
 						var par = $("<p>");
 
@@ -144,9 +160,11 @@ $(document).ready(function(){
 						par.addClass("par-display");
 						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
 						eventPic.addClass("image-display");
-						eventDisplay.append(eventPopUpLink, par, eventPic);
+						eventDisplay.append(eventTitle, par, eventPic);
 
 						$("#event-list").append(eventDisplay);
+
+
 						
 						//Creates a new modal for each iteration
 						var modal = $("<div>");
@@ -233,7 +251,15 @@ $(document).ready(function(){
 						console.log("time: " + time)
 						console.log(moment(time, "HH:mm a"));
 
+						console.log(modal + m);
+
 					}
+
+					$(document).on("click", ".event", function()  {
+						var modalID = $(this).attr("modal-id");
+						$(modalID).modal("open");
+						console.log(modalID);
+					})
 
 
 /*
