@@ -20,11 +20,11 @@ body {
 	font-family: 'Prompt', sans-serif;
 }
 
- .blue-container {
+.blue-container {
     background-color: #0d47a1;
   }
 
-  .nav-wrapper {
+ .nav-wrapper {
   	font-family: 'Prompt', sans-serif;
   }
 
@@ -83,13 +83,6 @@ input[type='range']
 	height: 300px;
 }
 
-.datepicker {
-	font-size:10px;
-}
-
-.picker_date-display {
-	
-}
 
 #categories-selected {
 	background-color: #0d47a1;

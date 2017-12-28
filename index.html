@@ -2,139 +2,173 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>GIG Compass!</title>
+	<title>Gig Compass</title>
+
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Prompt|Satisfy" rel="stylesheet">
+
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVE0YZTBYmeFwStCIUt8mMgyfL7tLYYhU&callback=initGoogleMap"></script> 
+	<!--Import materialize.js, must go after jquery-->
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVE0YZTBYmeFwStCIUt8mMgyfL7tLYYhU&callback=initGoogleMap"></script>
 
 	<script type="text/javascript" src="app.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-</head>
-<body>
 
-	<div class="page-header">
-		<h1>Gig Compass</h1>
+</head>
+
+<body>
+	<nav>
+		<div class="nav-wrapper blue-container">
+			<a href="#!" class="brand-logo">Gig Compass</a>
+			<ul class="right hide-on-med-and-down">
+				<li>  <input id="keyword-input" type="search" value="" placeholder="Search"></li>
+				<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
+				<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
+				<li id="submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div id="modal-categories" class="modal">
+		<ul class="collection">
+			<li value="100" class="collection-item" id="categories"><i class="material-icons">music_note</i> Music</li>
+			<li value="200" class="collection-item" id="categories"><i class="material-icons">golf_course</i> Sports</li>
+			<li value="300" class="collection-item" id="categories"><i class="material-icons">child_friendly</i> Family</li>
+			<li value="400" class="collection-item" id="categories"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
+		</ul>
 	</div>
 
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">Gig Finder</a>
-			</div>
-
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group form-group-sm">
-					<div class="input-group">
-						<div class="input-group-addon">
-							<span class="glyphicon glyphicon-search"></span> 
-						</div>
-						<input type="text" class="form-control" id="search-input" placeholder="What are you looking for?">
+	<div id="modal-location" class="modal">
+		<div class="row" id="form-location">
+			<form class="col s12" >
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="city-input" type="text" value="">
+						<label for="city-input">City:</label>
 					</div>
-
-					<select name="eventType" class="form-control selectpicker" id="eventType-input">
-						<option value="" disabled selected hidden="">Categories</option>
-						<option value="music">Music</option>
-						<option value="sports">Sports</option>
-						<option><span class="glyphicon glyphicon-search"></span>Sports</option>
-						<option data-thumbnail="sports.jpg">Sports</option>
-						<option value="family">Family</option>
-						<option value="arts-theater">Arts &amp; Theater</option>
-					</select>
-					<label>City: </label>
-					<input type="text" class="form-control" id="city-input" placeholder="City">
-					<label>State: </label>
-					<select name="state" class="form-control" id="state-input" placeholder="State">
-						<option value="" disabled selected hidden="">State</option>
-						<option value="AL">Alabama</option>
-						<option value="AK">Alaska</option>
-						<option value="AZ">Arizona</option>
-						<option value="AR">Arkansas</option>
-						<option value="CA">California</option>
-						<option value="CO">Colorado</option>
-						<option value="CT">Connecticut</option>
-						<option value="DE">Delaware</option>
-						<option value="DC">District Of Columbia</option>
-						<option value="FL">Florida</option>
-						<option value="GA">Georgia</option>
-						<option value="HI">Hawaii</option>
-						<option value="ID">Idaho</option>
-						<option value="IL">Illinois</option>
-						<option value="IN">Indiana</option>
-						<option value="IA">Iowa</option>
-						<option value="KS">Kansas</option>
-						<option value="KY">Kentucky</option>
-						<option value="LA">Louisiana</option>
-						<option value="ME">Maine</option>
-						<option value="MD">Maryland</option>
-						<option value="MA">Massachusetts</option>
-						<option value="MI">Michigan</option>
-						<option value="MN">Minnesota</option>
-						<option value="MS">Mississippi</option>
-						<option value="MO">Missouri</option>
-						<option value="MT">Montana</option>
-						<option value="NE">Nebraska</option>
-						<option value="NV">Nevada</option>
-						<option value="NH">New Hampshire</option>
-						<option value="NJ">New Jersey</option>
-						<option value="NM">New Mexico</option>
-						<option value="NY">New York</option>
-						<option value="NC">North Carolina</option>
-						<option value="ND">North Dakota</option>
-						<option value="OH">Ohio</option>
-						<option value="OK">Oklahoma</option>
-						<option value="OR">Oregon</option>
-						<option value="PA">Pennsylvania</option>
-						<option value="RI">Rhode Island</option>
-						<option value="SC">South Carolina</option>
-						<option value="SD">South Dakota</option>
-						<option value="TN">Tennessee</option>
-						<option value="TX">Texas</option>
-						<option value="UT">Utah</option>
-						<option value="VT">Vermont</option>
-						<option value="VA">Virginia</option>
-						<option value="WA">Washington</option>
-						<option value="WV">West Virginia</option>
-						<option value="WI">Wisconsin</option>
-						<option value="WY">Wyoming</option>
-					</select>	
-					<label>Zip: </label>
-					<input type="text" class="form-control" id="zip-input" placeholder="Zip">
-					<label>Radius: </label>
-					<input type="number" class="form-control" id="radius-input" name="points" value="15" step="1">
+					<div class="input-field col s12">
+						<select id="state-input" >
+							<option value="" disabled selected >State:</option>
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="DC">District Of Columbia</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansas</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="ME">Maine</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+						</select>	
+					</div>
+					<div class="input-field col s6">
+						<input id="zip-input" type="text" value="">
+						<label >Zip:</label>
+					</div>
+					<div class="input-field col s6">
+						<label >Radius:</label>
+						<input id="radius-input" type="range" min="5" max="50" />
+					</div>
 				</div>
-
-				<button type="submit" id="submit" class="btn btn-default">Submit</button>
-
 			</form>
 		</div>
-
-	</nav>
-</div>
+	</div>
 
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-6" id="event-list">
-			<div id="event">
+	<div id="modal-daterange" class="modal">
+		<div class="row" id="form-daterange">
+			<form>
+				<div class="col s6">	
+					<div>Selected Date:  <input type="text" class="datepicker"></div>
+				</div>
+				<div class="col s6">	
+					<div>Selected Date:  <input type="text" class="datepicker"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6" id="event-list">
 				
 			</div>
-		</div>
-		<div class="col-md-6">
-			<div id="map">
+			<div class="col-md-6">
+				<div id="map">
 
 
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<!--Pagination -->
+	<nav class="my-4 blue-container" id="page-buttons">
+		<ul class="pagination pagination-circle pg-blue mb-0">
+		</ul>
+	</nav>
+
 
 
 </body>
