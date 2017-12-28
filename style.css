@@ -38,18 +38,18 @@ body {
 }
 
 #modal-location {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
-  top: 0px !important;
+  top: 64px !important;
   left: 1040px;
   border-radius:1px;
   width: 15% !important ; 
-  height: 65% !important ;
+  height: 45% !important ;
 }
 
 #modal-daterange {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
   top: 0px !important;
@@ -60,14 +60,14 @@ body {
 }
 
 #modal-categories {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
-  top: 0px !important;
-  left: 900px;
+  top: 64px !important;
+  left: 890px;
   border-radius:1px;
-  width: 15% !important ; 
-  height: 60% !important ;
+  width: 14% !important ; 
+  height: 31.5% !important ;
 }
 
 input[type='range']
