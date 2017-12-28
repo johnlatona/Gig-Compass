@@ -88,10 +88,10 @@ $(document).ready(function(){
 		searchObj.radius = $("#radius-input").val();
 
 		// from date
-		searchObj.fromDate = moment();
+		searchObj.fromDate = moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		// to date
-		searchObj.toDate = moment().add(7, 'days');
+		searchObj.toDate = moment().add(7, 'days').format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		console.log(searchObj);
 
@@ -517,14 +517,14 @@ $(document).ready(function(){
 	$('select').material_select();
 
 
-   //  $('.datepicker').pickadate({
-	  //   selectMonths: true, // Creates a dropdown to control month
-	  //   selectYears: 15, // Creates a dropdown of 15 years to control year,
-	  //   today: 'Today',
-	  //   clear: 'Clear',
-	  //   close: 'Ok',
-	  //   closeOnSelect: false // Close upon selecting a date,
-  	// });
+    $('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 15, // Creates a dropdown of 15 years to control year,
+	    today: 'Today',
+	    clear: 'Clear',
+	    close: 'Ok',
+	    closeOnSelect: true // Close upon selecting a date,
+  	});
 
   	// Search - categories
   	$(document).on("click", "#categories", function() {
