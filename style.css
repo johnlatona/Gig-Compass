@@ -11,3 +11,96 @@
 	/*clear:both;*/
 	height:100px;
 }
+
+select:invalid { 
+	color: gray; 
+}
+
+body {
+	font-family: 'Prompt', sans-serif;
+}
+
+.blue-container {
+    background-color: #0d47a1;
+  }
+
+ .nav-wrapper {
+  	font-family: 'Prompt', sans-serif;
+  }
+
+.modal-form-row {
+  margin-bottom: 0px;
+}
+
+.input-fieldn {
+	font-family: 'Prompt', sans-serif;
+	margin-top: 20px;
+}
+
+#modal-location {
+  position:relative;
+  margin:0px;
+  padding: 0px;
+  top: 0px !important;
+  left: 1040px;
+  border-radius:1px;
+  width: 15% !important ; 
+  height: 65% !important ;
+}
+
+#modal-daterange {
+  position:relative;
+  margin:0px;
+  padding: 0px;
+  top: 0px !important;
+  left: 500px;
+  border-radius:1px;
+  width: 85% !important ; 
+  height: 100% !important ;
+}
+
+#modal-categories {
+  position:relative;
+  margin:0px;
+  padding: 0px;
+  top: 0px !important;
+  left: 900px;
+  border-radius:1px;
+  width: 15% !important ; 
+  height: 60% !important ;
+}
+
+input[type='range']
+{
+    padding-top: 28px;
+}
+
+#form-location #form-daterange {
+	margin: 0px;
+}
+
+#form-daterange {
+	height: 300px;
+}
+
+
+#categories-selected {
+	background-color: #0d47a1;
+	color: white;
+}
+
+ul.collection {
+	margin: 0px ;
+}
+
+nav ul li a:hover, 
+nav ul li a:active,
+nav ul li a:visited, 
+nav ul li a:link, 
+nav a:hover,
+nav a:active,
+nav a:visited,
+nav a:link{ 
+	color: white;   
+	text-decoration: none;
+}
