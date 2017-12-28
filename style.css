@@ -44,7 +44,7 @@ select:invalid {
   top: 64px !important;
   left: 1040px;
   border-radius:1px;
-  width: 18% !important ; 
+  width: 17% !important ; 
   height: 34% !important ;
 }
 
@@ -52,22 +52,24 @@ select:invalid {
   position:fixed;
   margin:0px;
   padding: 0px;
-  top: 0px !important;
-  left: 500px;
+  top: 64px !important;
+  left: 1075px;
   border-radius:1px;
-  width: 85% !important ; 
-  height: 100% !important ;
+  width: 20% !important ; 
+  height: 34% !important ;
 }
 
 #modal-categories {
   position:fixed;
   margin:0px;
-  padding: 0px;
+  padding: 5px;
   top: 64px !important;
   left: 890px;
   border-radius:1px;
-  width: 14% !important ; 
-  height: 31.5% !important ;
+  width: 16.5% !important ; 
+  height: 33.5% !important ;
+  font-weight: bold;
+  color: #757575;
 }
 
 input[type='range']
@@ -83,7 +85,6 @@ input[type='range']
 #form-daterange {
 	height: 300px;
 }
-
 
 #categories-selected {
 	background-color: #0d47a1;
