@@ -35,57 +35,39 @@
 </head>
 
 <body>
-
-
-	
-	<ul id="dropdown-categories" class="dropdown-content">
-		<li><a href="#!">Music</a></li>
-		<li><a href="#!">Sports</a></li>
-		<li><a href="#!">Family</a></li>
-		<li><a href="#!">Arts &amp; Theater</a></li>
-	</ul>
-
-
 	<nav>
 		<div class="nav-wrapper blue-container">
 			<a href="#!" class="brand-logo">Gig Compass</a>
 			<ul class="right hide-on-med-and-down">
-				<li>  <input id="search" type="search" placeholder="search"></li>
-
-				<li><a class="waves-effect waves-light modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
-
+				<li>  <input id="keyword-input" type="search" value="" placeholder="Search"></li>
+				<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
-
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
-
-				<li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+				<li id="search-submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
 			</ul>
 		</div>
 	</nav>
 
-
 	<div id="modal-categories" class="modal">
-	  <ul class="collection">
-      <li class="collection-item" id="categories"><i class="material-icons">music_note</i> Music</li>
-      <li class="collection-item" id="categories"><i class="material-icons">golf_course</i> Sports</li>
-      <li class="collection-item" id="categories"><i class="material-icons">child_friendly</i> Family</li>
-      <li class="collection-item" id="categories"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
-    </ul>
+		<ul class="collection">
+			<li value="100" class="collection-item" id="categories"><i class="material-icons">music_note</i> Music</li>
+			<li value="200" class="collection-item" id="categories"><i class="material-icons">golf_course</i> Sports</li>
+			<li value="300" class="collection-item" id="categories"><i class="material-icons">child_friendly</i> Family</li>
+			<li value="400" class="collection-item" id="categories"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
+		</ul>
 	</div>
 
-
 	<div id="modal-location" class="modal">
-
 		<div class="row" id="form-location">
 			<form class="col s12" >
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="city-input" type="text">
+						<input id="city-input" type="text" value="">
 						<label for="city-input">City:</label>
 					</div>
 					<div class="input-field col s12">
 						<select id="state-input" >
-							<option value="" disabled selected hidden="">State:</option>
+							<option value="" disabled selected >State:</option>
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -140,12 +122,12 @@
 						</select>	
 					</div>
 					<div class="input-field col s6">
-						<input id="zip-input" type="text">
+						<input id="zip-input" type="text" value="">
 						<label >Zip:</label>
 					</div>
 					<div class="input-field col s6">
 						<label >Radius:</label>
-						<input type="range" min="5" max="50" />
+						<input id="radius-input" type="range" min="5" max="50" />
 					</div>
 				</div>
 			</form>
@@ -158,10 +140,10 @@
 			<form>
 				<div class="col s6">	
 					<div>Selected Date:  <input type="text" class="datepicker"></div>
-					</div>
-					<div class="col s6">	
+				</div>
+				<div class="col s6">	
 					<div>Selected Date:  <input type="text" class="datepicker"></div>
-					</div>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -169,8 +151,70 @@
 
 	<script type="text/javascript">
 
+		var searchObj = {
+			keyword : "",
+			category : "",
+			city : "",
+			state : "",
+			zip : "",
+			radius : 5,
+			fromDate : moment(),
+			toDate : moment()
+	}
 
-		$('.modal').modal({
+	function setSearchParms() {
+		// keyword
+		searchObj.keyword = $("#keyword-input").val();
+
+		// Category
+		searchObj.category = "";
+		if ($("#categories-selected")) {
+			searchObj.category  = $("#categories-selected").val();
+			searchObj.category = getCategory(searchObj.category);
+		} 
+
+		// city
+		searchObj.city = $("#city-input").val();
+
+		// state
+		searchObj.state = $("#state-input option:selected").val();
+
+		// zip
+		searchObj.zip = $("#zip-input").val();
+
+		// radius
+		searchObj.radius = $("#radius-input").val();
+
+		// from date
+		searchObj.fromDate = moment();
+
+		// to date
+		searchObj.toDate = moment().add(7, 'days');
+
+		console.log(searchObj);
+	}
+
+	function getCategory(categoryValue) {
+		switch(categoryValue) {
+			case 100:
+			return "music";
+			break;
+			case 200:
+			return "sports"
+			break;
+			case 300:
+			return "family";
+			break;
+			case 400:
+			return "arts-theater"
+			break;
+			default:
+			return "";
+		}
+	}
+
+
+	$('.modal').modal({
       dismissible: true, // Modal can be dismissed by clicking outside of the modal
       opacity: 0, // Opacity of modal background
       inDuration: 300, // Transition in duration
@@ -178,40 +222,50 @@
       startingTop: '4%', // Starting top style attribute
       endingTop: '15%', // Ending top style attribute
       ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-        // alert("Ready");
         console.log(modal, trigger);
     },
     complete: function() { 
-      // alert('Closed'); 
+
       } // Callback for Modal close
   });
 
 	$('select').material_select();
 
 
-    $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15, // Creates a dropdown of 15 years to control year,
-    today: 'Today',
-    clear: 'Clear',
-    close: 'Ok',
-    closeOnSelect: false // Close upon selecting a date,
-  });
+   //  $('.datepicker').pickadate({
+	  //   selectMonths: true, // Creates a dropdown to control month
+	  //   selectYears: 15, // Creates a dropdown of 15 years to control year,
+	  //   today: 'Today',
+	  //   clear: 'Clear',
+	  //   close: 'Ok',
+	  //   closeOnSelect: false // Close upon selecting a date,
+  	// });
 
-    $(document).on("click", "#categories", function() {
-    	var selected = $("#categories-selected");
-    	if (selected) {
-    		selected.attr("id", "categories");
-    	}
-    	$(this).attr("id", "categories-selected");
-    });
+  	$(document).on("click", "#categories", function() {
+  		var selected = $("#categories-selected");
 
-     $(document).on("click", "#categories-selected", function() {
-    	$(this).attr("id", "categories");
-    });
+  		if (selected) {
+  			selected.attr("id", "categories");
+  		}
+  		$(this).attr("id", "categories-selected");
+  	});
+
+  	$(document).on("click", "#categories-selected", function() {
+  		$(this).attr("id", "categories");
+  	});
 
 
-	</script>
+  	$("#search-submit").on("click", function() {
+  		event.preventDefault();
+
+  		// set search parmaters in SearchParm object
+  		setSearchParms();
+
+
+  	});
+
+
+  </script>
 
 </body>
 </html>

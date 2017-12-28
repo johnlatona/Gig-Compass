@@ -99,3 +99,15 @@ input[type='range']
 ul.collection {
 	margin: 0px ;
 }
+
+nav ul li a:hover, 
+nav ul li a:active,
+nav ul li a:visited, 
+nav ul li a:link, 
+nav a:hover,
+nav a:active,
+nav a:visited,
+nav a:link{ 
+	color: white;   
+	text-decoration: none;
+}
