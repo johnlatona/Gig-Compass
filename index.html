@@ -60,13 +60,13 @@
 	<div id="modal-location" class="modal">
 		<div class="row" id="form-location">
 			<form class="col s12" >
-				<div class="row">
+				<div class="row" id="form-location">
 					<div class="input-field col s12">
-						<input id="city-input" type="text" value="">
-						<label for="city-input">City:</label>
+						<input id="city-input" type="text" value="" placeholder="City">
 					</div>
 					<div class="input-field col s12">
-						<select id="state-input" >
+						<input id="state-input" type="text" value="" placeholder="State" autocomplete = "new-password">
+						<!-- <select id="state-input" >
 							<option value="" disabled selected >State:</option>
 							<option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
@@ -119,11 +119,10 @@
 							<option value="WV">West Virginia</option>
 							<option value="WI">Wisconsin</option>
 							<option value="WY">Wyoming</option>
-						</select>	
+						</select>	 -->
 					</div>
 					<div class="input-field col s6">
-						<input id="zip-input" type="text" value="">
-						<label >Zip:</label>
+						<input id="zip-input" type="text" value="" placeholder="Zip">
 					</div>
 					<div class="input-field col s6">
 						<label >Radius:</label>
