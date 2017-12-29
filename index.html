@@ -81,16 +81,24 @@
 
 
 	<div id="modal-daterange" class="modal">
-		<div class="row">
-			<form id="form-datarange">
-				<div class="col s12">	
-					<div>Selected Date:  <input type="text" class="datepicker"></div>
+		<form id="form-datarange">
+			<div class="row">
+				<div class="col s3">	
+					<label class="label-daterange">From</label>
 				</div>
-				<div class="col s12">	
-					<div>Selected Date:  <input type="text" class="datepicker"></div>
+				<div class="col s8">	
+					<input id="from-date-input" value="" type="date">
 				</div>
-			</form>
-		</div>
+			</div>
+			<div class="row">
+				<div class="col s3">	
+					<label class="label-daterange">To</label>
+				</div>
+				<div class="col s8">	
+					<input id="to-date-input" value="" type="date">
+				</div>
+			</div>
+		</form>
 	</div>
 
 

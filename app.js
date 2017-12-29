@@ -88,10 +88,24 @@ $(document).ready(function(){
 		searchObj.radius = $("#radius-input").val();
 
 		// from date
-		searchObj.fromDate = moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		searchObj.fromDate = $("#from-date-input").val();
+		console.log("from Date " + searchObj.fromDate);
+		if (!searchObj.fromDate == "") {
+			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		}
+		console.log("from Date " + searchObj.fromDate);
+		
+		// moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		// to date
-		searchObj.toDate = moment().add(7, 'days').format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		searchObj.toDate = $("#to-date-input").val();
+		console.log("to Date " + searchObj.toDate);
+		if (!searchObj.toDate == "") {
+			searchObj.toDate = moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		}
+		console.log("to Date " + searchObj.toDate);
+
+		// searchObj.toDate = moment().add(7, 'days').format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		console.log(searchObj);
 
