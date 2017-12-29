@@ -1,32 +1,33 @@
-
 #map {
-	width: 100%;
-	height: 400px;
-	background-color: grey;
+  width: 100%;
+  height: 400px;
+  background-color: grey;
+  position: relative;
+  z-index: 0;
 }
 
 .par-display{
-	/*float:left;*/
+  /*float:left;*/
 }
 .image-display{
-	/*clear:both;*/
-	height:100px;
+  /*clear:both;*/
+  height:100px;
 }
 
 select:invalid { 
-	color: gray; 
+  color: gray; 
 }
 
 body {
-	font-family: 'Prompt', sans-serif;
+  font-family: 'Prompt', sans-serif;
 }
 
- .blue-container {
+.blue-container {
     background-color: #0d47a1;
   }
 
-  .nav-wrapper {
-  	font-family: 'Prompt', sans-serif;
+ .nav-wrapper {
+    font-family: 'Prompt', sans-serif;
   }
 
 .modal-form-row {
@@ -34,23 +35,23 @@ body {
 }
 
 .input-fieldn {
-	font-family: 'Prompt', sans-serif;
-	margin-top: 20px;
+  font-family: 'Prompt', sans-serif;
+  margin-top: 20px;
 }
 
 #modal-location {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
-  top: 0px !important;
+  top: 64px !important;
   left: 1040px;
   border-radius:1px;
   width: 15% !important ; 
-  height: 65% !important ;
+  height: 45% !important ;
 }
 
 #modal-daterange {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
   top: 0px !important;
@@ -61,14 +62,14 @@ body {
 }
 
 #modal-categories {
-  position:relative;
+  position:fixed;
   margin:0px;
   padding: 0px;
-  top: 0px !important;
-  left: 900px;
+  top: 64px !important;
+  left: 890px;
   border-radius:1px;
-  width: 15% !important ; 
-  height: 60% !important ;
+  width: 14% !important ; 
+  height: 31.5% !important ;
 }
 
 input[type='range']
@@ -77,26 +78,56 @@ input[type='range']
 }
 
 #form-location #form-daterange {
-	margin: 0px;
+  margin: 0px;
 }
 
 #form-daterange {
-	height: 300px;
+  height: 300px;
 }
 
-.datepicker {
-	font-size:10px;
-}
-
-.picker_date-display {
-	
-}
 
 #categories-selected {
-	background-color: #0d47a1;
-	color: white;
+  background-color: #0d47a1;
+  color: white;
 }
 
 ul.collection {
-	margin: 0px ;
+  margin: 0px ;
+}
+
+nav ul li a:hover, 
+nav ul li a:active,
+nav ul li a:visited, 
+nav ul li a:link, 
+nav a:hover,
+nav a:active,
+nav a:visited,
+nav a:link{ 
+  color: white;   
+  text-decoration: none;
+}
+
+#event-list {
+  position: relative;
+  z-index: 0;
+}
+
+.pop-up-event {
+  position: relative;
+  z-index: 3;
+  border: 2px solid #000000;
+}
+
+.pop-up-img {
+  width: 30vw;
+}
+
+.row-three {
+  text-align: center;
+}
+.purchase-button {
+  width: 100%;
+  height: 4vw;
+  font-size: 2vw;
+  background-color: #19E3AF;
 }

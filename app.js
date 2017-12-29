@@ -137,13 +137,11 @@ $(document).ready(function(){
 
 						var eventDisplay = $("<div>").addClass("event");
 
-						eventDisplay.attr("modal-id", "#modal" + m)
+						eventDisplay.attr("pop-up-id", "#pop-up" + m)
 
 						var eventTitle = $("<h5>");
-
-						var eventName = $("<span>").addClass("name-display");
-						eventName.append(events[m].name);
-						eventTitle.append(eventName);
+						eventTitle.addClass("name-display");
+						eventTitle.append(events[m].name);
 
 						var par = $("<p>");
 
@@ -167,33 +165,33 @@ $(document).ready(function(){
 
 						
 						//Creates a new modal for each iteration
-						var modal = $("<div>");
+						var popUpEvent = $("<div>");
 						//Adds class="modal" to each new modal div
-						modal.addClass("modal");
+						popUpEvent.addClass("col-md-10 col-md-offset-1 pop-up-event");
 						//Adds a modal number id corresponding to each index number of the events array.
-						modal.attr("id", "modal" + m);
+						popUpEvent.attr("id", "pop-up" + m);
 						//Creates a new content div for each modal
-						var modalContent = $("<div>");
-						modalContent.addClass("modal-content");
+						var popUpContent = $("<div>");
+						popUpContent.addClass("pop-up-content");
 						//first row content in modal: Event name, date and time
 						var firstRow = $("<div>");
 						firstRow.addClass("row");
 						var firstRowColOne = $("<div>");
-						firstRowColOne.addClass("s12");
-						var modalHeading = $("<h3>");
-						modalHeading.text(events[m].name);
+						firstRowColOne.addClass("col-xs-12");
+						var popUpHeading = $("<h3>");
+						popUpHeading.text(events[m].name);
 						var expandedEventDateTime = $("<p>");
 						expandedEventDateTime.text(moment(events[m].dates.start.localDate).format("dddd, MMMM Do, YYYY") + " at " + moment(convertedTime).format("h:mm A"));
-						firstRowColOne.append(modalHeading, expandedEventDateTime);
+						firstRowColOne.append(popUpHeading, expandedEventDateTime);
 						firstRow.append(firstRowColOne);
 						//second row content in modal: event picture, venue name, and address
 						var secondRow = $("<div>");
 						secondRow.addClass("row");
 						var secondRowColOne = $("<div>");
-						secondRowColOne.addClass("s5");
+						secondRowColOne.addClass("col-xs-5");
 						secondRowColOne.append(eventPic);
 						var secondRowColTwo = $("<div>");
-						secondRowColTwo.addClass("s7");
+						secondRowColTwo.addClass("col-xs-7");
 						secondRowColTwo.html('<h4>' + events[m]._embedded.venues[0].name + "</h4><br><h5>Address:</h5><br><h6>" + events[m]._embedded.venues[0].address.line1 + "</h6><br><h6>" + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + " " +
 						events[m]._embedded.venues[0].postalCode);
 						secondRow.append(secondRowColOne, secondRowColTwo);
@@ -201,7 +199,7 @@ $(document).ready(function(){
 						var thirdRow = $("<div>")
 						thirdRow.addClass("row");
 						var thirdRowColOne = $("<div>");
-						thirdRowColOne.addClass("s12");
+						thirdRowColOne.addClass("col-xs-12 row-three");
 						var purchaseButton = $("<a>");
 						purchaseButton.attr("href", events[m].url);
 						purchaseButton.attr("target", "_blank");
@@ -209,35 +207,24 @@ $(document).ready(function(){
 						purchaseButton.text("Purchase Tickets");
 						thirdRow.append(purchaseButton);
 						//Modal Footer: Close Button, and Next and Previous buttons to cycle through event modals.
-						var modalFooter = $("<div>");
-						modalFooter.addClass("modal-footer");
-						var closeButton = $("<a>");
-						closeButton.attr("href", "#!");
-						closeButton.addClass("modal-close waves-effect waves-green btn-flat");
+						var popUpFooter = $("<div>");
+						popUpFooter.addClass("pop-up-footer");
+						var closeButton = $("<button>");
+						closeButton.addClass("waves-effect waves-green btn-flat");
 						closeButton.text("X Close");
-						var previousButton = $("<a>");
-						if(m === 0) {
-							previousButton.attr("href", "#modal0");
-						}
-						else {
-							previousButton.attr("href", "#modal" + (m - 1));
-						}
+						var previousButton = $("<button>");
 						previousButton.addClass("waves-effect waves-green btn-flat");
 						previousButton.text("Previous Result");
-						var nextButton = $("<a>");
-						if(m === events.length - 1) {
-							nextButton.attr("href", "#modal0");
-						}
-						else {
-							nextButton.attr("href", "#modal" + (m + 1));
-						}
+						var nextButton = $("<button>");
 						nextButton.addClass("waves-effect waves-green btn-flat");
 						previousButton.text("Next Result");
-						modalFooter.append(closeButton, previousButton, nextButton);
+						popUpFooter.append(closeButton, previousButton, nextButton);
 
-						modalContent.append(firstRow, secondRow, thirdRow, modalFooter);
+						popUpContent.append(firstRow, secondRow, thirdRow, popUpFooter);
 
-						modal.append(modalContent);
+						popUpEvent.append(popUpContent);
+
+						$("#main-content").append(popUpEvent);
 
 
 
@@ -254,12 +241,6 @@ $(document).ready(function(){
 						console.log(modal + m);
 
 					}
-
-					$(document).on("click", ".event", function()  {
-						var modalID = $(this).attr("modal-id");
-						$(modalID).modal("open");
-						console.log(modalID);
-					})
 
 
 /*
