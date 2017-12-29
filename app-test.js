@@ -59,6 +59,8 @@ $(document).ready(function(){
 			toDate : moment()
 		}
 
+	var popUpIdArr = [];
+
 
 	console.log("numperpage" + numPerPage)
 
@@ -175,7 +177,7 @@ $(document).ready(function(){
 
 						var eventDisplay = $("<div>").addClass("event");
 
-						eventDisplay.attr("modal-id", "#modal" + m)
+						eventDisplay.attr("data-pop-up-id", "#pop-up" + m)
 
 						var eventTitle = $("<h5>");
 						eventTitle.addClass("name-display");
@@ -215,18 +217,25 @@ $(document).ready(function(){
 						popUpEvent.attr("id", "pop-up" + m);
 						//Creates a new content div for each modal
 						var popUpContent = $("<div>");
-						popUpContent.addClass("pop-up-content");
+						popUpContent.addClass("pop-up-content container-fluid");
 						//first row content in modal: Event name, date and time
 						var firstRow = $("<div>");
 						firstRow.addClass("row");
+						firstRow.attr("id", "pop-up-header");
 						var firstRowColOne = $("<div>");
-						firstRowColOne.addClass("col-xs-12");
+						firstRowColOne.addClass("col-xs-11");
 						var popUpHeading = $("<h3>");
 						popUpHeading.text(events[m].name);
 						var expandedEventDateTime = $("<p>");
 						expandedEventDateTime.text(moment(events[m].dates.start.localDate).format("dddd, MMMM Do, YYYY") + " at " + moment(convertedTime).format("h:mm A"));
 						firstRowColOne.append(popUpHeading, expandedEventDateTime);
-						firstRow.append(firstRowColOne);
+						var firstRowColTwo = $("<div>");
+						firstRowColTwo.addClass("col-xs-1");
+						var closeButton = $("<button>");
+						closeButton.addClass("waves-effect waves-green btn-flat close-button col-xs-1");
+						closeButton.text("X");
+						firstRowColTwo.append(closeButton);
+						firstRow.append(firstRowColOne, firstRowColTwo);
 						//second row content in modal: event picture, venue name, and address
 						var secondRow = $("<div>");
 						secondRow.addClass("row");
@@ -252,22 +261,27 @@ $(document).ready(function(){
 						//Modal Footer: Close Button, and Next and Previous buttons to cycle through event modals.
 						var popUpFooter = $("<div>");
 						popUpFooter.addClass("pop-up-footer");
-						var closeButton = $("<button>");
-						closeButton.addClass("waves-effect waves-green btn-flat");
-						closeButton.text("X Close");
 						var previousButton = $("<button>");
-						previousButton.addClass("waves-effect waves-green btn-flat");
-						previousButton.text("Previous Result");
+						previousButton.addClass("waves-effect waves-green btn-flat previous-button");
+						previousButton.attr("data-pop-up-id", "#pop-up" +m);
+						previousButton.text("<< Previous Result");
 						var nextButton = $("<button>");
-						nextButton.addClass("waves-effect waves-green btn-flat");
-						previousButton.text("Next Result");
-						popUpFooter.append(closeButton, previousButton, nextButton);
+						nextButton.addClass("waves-effect waves-green btn-flat next-button");
+						nextButton.attr("data-pop-up-id", "#pop-up" +m);
+						nextButton.text("Next Result >>");
+						popUpFooter.append(previousButton, nextButton);
 
 						popUpContent.append(firstRow, secondRow, thirdRow, popUpFooter);
 
 						popUpEvent.append(popUpContent);
 
+						var id = previousButton.attr("data-pop-up-id");
+						popUpIdArr.push(id);
+
+
 						$("#main-content").append(popUpEvent);
+
+						$("#pop-up" + m).hide();
 
 
 
@@ -280,13 +294,61 @@ $(document).ready(function(){
 						console.log(moment.parseZone(time)._i);
 						console.log("time: " + time)
 						console.log(moment(time, "HH:mm a"));
+						console.log("IDs: " +popUpIdArr);
 
 					}
 
+					//Opens ticket purchase page in a new window
 					$(document).on("click", ".purchase-button", function() {
 						var purchaseUrl = $(this).attr("data-url");
 						window.open(purchaseUrl, "_blank");
 					})
+					//Opens pop-up by clicking on the search result
+					$(document).on("click", ".event", function() {
+						var popUpId = $(this).attr("data-pop-up-id");
+						$(popUpId).fadeIn("fast");
+					})
+					//Closes the pop-up
+					$(document).on("click", ".close-button", function() {
+						$(".pop-up-event").fadeOut("fast");
+					})
+
+					$(document).on("click", ".previous-button", function() {
+						var prevButtonId = $(this).attr("data-pop-up-id");
+						console.log(prevButtonId);
+						if(prevButtonId == popUpIdArr[0]) {
+							return;
+						}
+						else {
+							for(var index = 0; index < popUpIdArr.length; index++) {
+								if(prevButtonId == popUpIdArr[index]) {
+									$(prevButtonId).hide();
+									$(popUpIdArr[index - 1]).show();
+								}
+							}
+						}
+					})
+
+					$(document).on("click", ".next-button", function() {
+						var nextButtonId = $(this).attr("data-pop-up-id");
+						console.log(nextButtonId);
+						if(nextButtonId == popUpIdArr[popUpIdArr.length - 1]) {
+							console.log("I can't go any farther");
+							return;
+						}
+						else {
+							console.log("starting for loop");
+							console.log(popUpIdArr);
+							for(var index = 0; index < popUpIdArr.length; index++) {
+								if(nextButtonId == popUpIdArr[index]) {
+									console.log("on to the next pop up");
+									$(nextButtonId).hide();
+									$(popUpIdArr[index + 1]).show();
+								}
+							}
+						}
+					})
+
 
 					// to prevent additional pagination each time
 					$(".pagination").empty();

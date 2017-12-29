@@ -1,9 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/f/fd/PalaciodelosDeportes_Concierto.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: contain
+}
+
+body {
+  height: 100%;
+}
+
+h6 {
+  font-size: 1.5vw;
+}
+
+#main-content {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/f/fd/PalaciodelosDeportes_Concierto.jpg");
+  background-size: cover;
+  background-position: top right;
+  background-attachment: fixed;
+
+}
+
 #map {
   width: 100%;
-  height: 400px;
-  background-color: grey;
-  position: relative;
-  z-index: 0;
+  height: 40vw;
+  background-color: rgba(255, 255, 255, 0.01);
+  position: fixed;
+  right: 0;
+  margin: 0;
+  padding: 0;
+
+}
+
+#nav-bar {
+  padding: 1.5vw;
+  height: 7vw;
+}
+
+#search-bar {
+  margin-bottom: 1vw;
+
+}
+
+#compass {
+  font-size: 5vw;
+}
+
+#title {
+  font-size: 3vw;
+  padding-left: 2vw;
+  font-style: italic;
 }
 
 .par-display{
@@ -13,6 +64,7 @@
   /*clear:both;*/
   height:100px;
 }
+
 
 select:invalid { 
   color: gray; 
@@ -109,13 +161,48 @@ nav a:link{
 
 #event-list {
   position: relative;
-  z-index: 0;
+  margin-bottom: 5vw;
+  margin-top: 3vw;
+}
+
+.event {
+  margin-top: 1vw;
+  border: 1px solid #8A8A8A;
+  border-radius: 15px;
+  padding: 1vw;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.event:hover {
+  background-color: rgba(171, 171, 171, 0.85);
+  cursor: pointer;
 }
 
 .pop-up-event {
-  position: relative;
+  position: fixed;
+  top: 6vw;
   z-index: 3;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 0;
+}
+
+.pop-up-content {
+  padding: 0;
+}
+
+.next-button {
+  float: right;
+}
+
+#pop-up-header {
+  background-color: rgba(219, 219, 219, 0.95);
+  width: 100% !important;
+  border: 1px solid #DBDBDB;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom: outset;
 }
 
 .pop-up-img {
@@ -130,4 +217,32 @@ nav a:link{
   height: 4vw;
   font-size: 2vw;
   background-color: #19E3AF;
+}
+
+.purchase-button:hover {
+  background-color: #16C497;
+}
+
+#page-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0:
+  width: 100%;
+  z-index: 0;
+}
+
+.close-button {
+  font-size: 2vw;
+  margin-top: 2vw;
+  height: 3vw;
+  text-align: center;
+  padding-left: 1vw
+}
+
+.close-button:hover {
+  background-color: #C4C4C4;
+}
+
+.close-button:active {
+  background-color: #6E6E6E;
 }
