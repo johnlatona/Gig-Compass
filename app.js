@@ -24,6 +24,8 @@ function initGoogleMap() {
 
 $(document).ready(function(){
 
+	$(".background-opacity").hide();
+
 	var string = "1.6525625";
 	var number = parseFloat(string);
 
@@ -179,6 +181,18 @@ $(document).ready(function(){
 
 						eventDisplay.attr("data-pop-up-id", "#pop-up" + m)
 
+						var eventRow = $("<div>");
+						eventRow.addClass("row");
+
+						eventColOne = $("<div>").addClass("col-xs-4");
+
+						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
+						eventPic.addClass("image-display");
+
+						eventColOne.append(eventPic);
+
+						var eventColTwo = $("<div>").addClass("col-xs-8");
+
 						var eventTitle = $("<h5>");
 						eventTitle.addClass("name-display");
 						eventTitle.append(events[m].name);
@@ -196,10 +210,10 @@ $(document).ready(function(){
 
 						par.append(eventDate, eventVenue);
 						par.addClass("par-display");
-						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
-						eventPic.addClass("image-display");
-						eventDisplay.append(eventTitle, par, eventPic);
 
+						eventColTwo.append(eventTitle, par);
+						eventRow.append(eventColOne, eventColTwo);
+						eventDisplay.append(eventRow);
 						$("#event-list").append(eventDisplay);
 
 
@@ -306,11 +320,15 @@ $(document).ready(function(){
 					//Opens pop-up by clicking on the search result
 					$(document).on("click", ".event", function() {
 						var popUpId = $(this).attr("data-pop-up-id");
+						$(".background-opacity").fadeIn("fast");
 						$(popUpId).fadeIn("fast");
+						console.log("POP UP WORKING");
 					})
 					//Closes the pop-up
 					$(document).on("click", ".close-button", function() {
+						$(".background-opacity").fadeOut("fast");
 						$(".pop-up-event").fadeOut("fast");
+
 					})
 
 					$(document).on("click", ".previous-button", function() {
