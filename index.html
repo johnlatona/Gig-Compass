@@ -35,27 +35,65 @@
 </head>
 
 <body>
-	<nav>
+	<nav >
 		<div class="nav-wrapper blue-container">
 			<a href="#!" class="brand-logo">Gig Compass</a>
 			<ul class="right hide-on-med-and-down">
 				<li>  <input id="keyword-input" type="search" value="" placeholder="Search"></li>
-				<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
+				<li>
+					<div id="search-categories">
+						<a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a>
+						<div id="modal-categories" class="modal modal-fixed-footer">
+							<p>Categories</p>
+							<ul class="collection">
+								<li class="collection-item">
+									one
+								</li>
+								<li class="collection-item">
+									two
+								</li>
+							</ul>
+
+							<!-- <ul class="collection">
+								<li value="100" class="collection-item" id="categories"><i class="material-icons" id="categories-icons">music_note</i> Music</li>
+								<li value="200" class="collection-item" id="categories"><i class="material-icons" id="categories-icons">golf_course</i> Sports</li>
+								<li value="300" class="collection-item" id="categories"><i class="material-icons" id="categories-icons">child_friendly</i> Family</li>
+								<li value="400" class="collection-item" id="categories"><i class="material-icons" id="categories-icons">tag_faces</i> Arts &amp; Theater</li>
+							</ul> -->
+							<!-- <table>
+								<tr>
+									<td>
+										<span><i class="material-icons">music_note</i> Music</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span><i class="material-icons">golf_course</i> Sports</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span><i class="material-icons">child_friendly</i> Family</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span><i class="material-icons">tag_faces</i> Arts &amp; Theater</span>
+									</td>
+								</tr>
+							</table> -->
+						</div>
+					</div>
+				</li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
 				<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
 				<li id="submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
 			</ul>
 		</div>
+		
 	</nav>
 
-	<div id="modal-categories" class="modal">
-		<ul class="collection">
-			<li value="100" class="collection-item" id="categories"><i class="material-icons">music_note</i> Music</li>
-			<li value="200" class="collection-item" id="categories"><i class="material-icons">golf_course</i> Sports</li>
-			<li value="300" class="collection-item" id="categories"><i class="material-icons">child_friendly</i> Family</li>
-			<li value="400" class="collection-item" id="categories"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
-		</ul>
-	</div>
+
 
 	<div id="modal-location" class="modal">
 		<div class="row" id="form-location">
