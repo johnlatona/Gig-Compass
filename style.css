@@ -60,22 +60,22 @@ select:invalid {
   height: 30% !important ;
 }
 
-#categories,
+ #categories,
 #categories-selected{
-	height: 50px;
+	height: 40px;
 	width: 300px;
-	padding-left: 10px;
-	padding-top: 0px;
+/*	padding-left: 10px;
+	padding-top: 0px;*/
 
-}
+} 
 
-#cspan {
+/* #cspan {
 	padding-bottom: 20px;
-}
+}*/
 
 #categories-icons {
 	display: inline;
-}
+} 
  
 
 #search-categories {
@@ -83,7 +83,7 @@ select:invalid {
 }
 
 #modal-categories { 
-  position: relative;
+  position: absolute;
   margin:0px;
   padding: 5px;
   top: 64px !important;
