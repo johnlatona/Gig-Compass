@@ -438,7 +438,8 @@ $(document).ready(function(){
 
 
 						for (var q = 0; q < numPages; q++) {
-							var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
+							// var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
+							var pageList = $("<li class='waves-effect'><a href='#!'>" + parseInt(q+1) + "</a></li>");
 							pageList.attr("data-number", q);
 							if (q==currentPage){
 								pageList.addClass("active")
@@ -520,7 +521,7 @@ $(document).ready(function(){
 
 		// remove active class from all page numbers 
 		//(this way we don't have to determine which page number was the last one clicked)
-		$(".page-item").removeClass("active");
+		$(".waves-effect").removeClass("active");
 		//add class "active" to the page numebr clicked
 		$(this).addClass("active");
 		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName + size + page;
