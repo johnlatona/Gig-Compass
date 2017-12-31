@@ -361,7 +361,8 @@ $(document).ready(function(){
 								if(nextButtonId == popUpIdArr[index]) {
 									console.log("on to the next pop up");
 									$(nextButtonId).hide();
-									$(popUpIdArr[index + 1]).show();								}
+									$(popUpIdArr[index + 1]).show();					
+								}
 							}
 						}
 					})
