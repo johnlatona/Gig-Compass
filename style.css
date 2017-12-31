@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Prompt', sans-serif;
 }
 
 html {
@@ -102,7 +103,7 @@ select:invalid {
   }
 
  .nav-wrapper {
-    font-family: 'Prompt', sans-serif;
+  	font-family: 'Prompt', sans-serif;
   }
 
 .modal-form-row {
@@ -110,8 +111,37 @@ select:invalid {
 }
 
 .input-fieldn {
-  font-family: 'Prompt', sans-serif;
-  margin-top: 20px;
+	font-family: 'Prompt', sans-serif;
+	margin-top: 20px;
+}
+
+#keyword-input {
+	width: 250px;
+}
+
+#modal-categories {
+  position:fixed;
+  margin:0px;
+  padding: 5px;
+  top: 64px !important;
+  left: 60%;
+  border-radius:1px;
+  width: 16.5% !important ; 
+  height: 33.5% !important ;
+  font-weight: bold;
+  color: #757575;
+}
+
+#modal-daterange {
+  position:fixed;
+  margin:0px;
+  padding: 5px;
+  padding-top: 20px;
+  top: 64px !important;
+  left: 80%;
+  border-radius:1px;
+  width: 18% !important ; 
+  height: 30% !important ;
 }
 
 #modal-location {
@@ -119,32 +149,10 @@ select:invalid {
   margin:0px;
   padding: 0px;
   top: 64px !important;
-  left: 1040px;
+  left: 70%;
   border-radius:1px;
-  width: 15% !important ; 
-  height: 45% !important ;
-}
-
-#modal-daterange {
-  position:fixed;
-  margin:0px;
-  padding: 0px;
-  top: 0px !important;
-  left: 500px;
-  border-radius:1px;
-  width: 85% !important ; 
-  height: 100% !important ;
-}
-
-#modal-categories {
-  position:fixed;
-  margin:0px;
-  padding: 0px;
-  top: 64px !important;
-  left: 890px;
-  border-radius:1px;
-  width: 14% !important ; 
-  height: 31.5% !important ;
+  width: 17% !important ; 
+  height: 34% !important ;
 }
 
 input[type='range']
@@ -152,22 +160,22 @@ input[type='range']
     padding-top: 28px;
 }
 
-#form-location #form-daterange {
-  margin: 0px;
+#form-location, 
+#form-daterange {
+	margin: 0px !important;
 }
 
 #form-daterange {
-  height: 300px;
+	height: 300px;
 }
 
-
 #categories-selected {
-  background-color: #0d47a1;
-  color: white;
+	background-color: #0d47a1;
+	color: white;
 }
 
 ul.collection {
-  margin: 0px ;
+	margin: 0px ;
 }
 
 nav ul li a:hover, 
@@ -287,4 +295,35 @@ nav a:link{
 
 .pagination {
   margin-right: 2vw;
+}
+
+#zip-input,
+#radius-input{
+	width: 80px;
+}
+
+#city-input,
+#zip-input  {
+	margin: 0px;
+}
+
+ #radius-input {
+  margin-bottom: 0px;
+}
+
+[type="date"] {
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.label-daterange {
+	padding-top: 25px;
+	padding-left: 5px;
+	font-weight: bold;
+	font-size: 1rem;
 }

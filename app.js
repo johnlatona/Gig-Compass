@@ -1,3 +1,4 @@
+
 var locations =[];
 
 var marker;
@@ -22,6 +23,7 @@ function initGoogleMap() {
 }; // initGoogleMap
 
 
+
 $(document).ready(function(){
 
 	$(".background-opacity").hide();
@@ -33,6 +35,312 @@ $(document).ready(function(){
 	console.log(number);
 
 	var events;
+	var apiKey;
+	var city
+	var state;
+	var zipCode;
+	var keyword; 
+	var radius; 
+	var classificationName;
+	var size;
+	var page;
+
+	var queryUrl;
+
+	var numPerPage = 10;
+	var totalEvents;
+	var currentPage = 0;
+
+	var searchObj = {
+			keyword : "",
+			category : "",
+			city : "",
+			state : "",
+			stateLongName : "",
+			zip : "",
+			radius : 5,
+			fromDate : "",
+			fromDateDisplay : "",
+			toDate : "",
+			toDateDisplay : ""
+		}
+
+	var selectedCategory = "";
+
+
+	setSearchParametersFromLocalStorage();
+
+	console.log("numperpage" + numPerPage)
+
+
+	function setSearchParameters() {
+		// keyword
+		searchObj.keyword = $("#keyword-input").val();
+
+		// Category
+		searchObj.category = "";
+		if ($("#categories-selected")) {
+			searchObj.category  = $("#categories-selected").val();
+			searchObj.category = getCategory(searchObj.category);
+		} 
+
+		// city
+		searchObj.city = $("#city-input").val();
+
+		// state
+		searchObj.stateLongName = $("#state-input").val();
+		searchObj.state = getStateCode(searchObj.stateLongName);
+
+		// zip
+		searchObj.zip = $("#zip-input").val();
+
+		// radius
+		searchObj.radius = $("#radius-input").val();
+
+		// from date
+		searchObj.fromDate = $("#from-date-input").val();
+		if (!searchObj.fromDate == "") {
+			searchObj.fromDateDisplay = searchObj.fromDate;
+			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.fromDateDisplay = "";
+		}
+
+		// to date
+		searchObj.toDate = $("#to-date-input").val();
+		if (!searchObj.toDate == "") {
+			searchObj.toDateDisplay = searchObj.toDate;
+			searchObj.toDate =  moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.toDateDisplay = "";
+		}
+
+		console.log(searchObj);
+
+	} // setSearchParameters
+
+	function getCategory(categoryValue) {
+		switch(categoryValue) {
+			case 100:
+				return "music";
+				break;
+			case 200:
+				return "sports"
+				break;
+			case 300:
+				return "family";
+				break;
+			case 400:
+				return "arts-theater"
+				break;
+			default:
+				return "";
+		}
+	} // getCategory
+
+	function getStateCode(state) {
+		switch(state) {
+			case "Alabama":
+				return "AL";
+				break;
+			case "Alaska":
+				return "AK";
+				break;
+			case "Arizona":
+				return "AZ";
+				break;
+			case "Arkansas":
+				return "AR";
+				break;
+			case "California":
+				return "CA";
+				break;
+			case "Colorado":
+				return "CO";
+				break;
+			case "Connecticut":
+				return "CT";
+				break;
+			case "Delaware":
+				return "DE";
+				break;
+			case "District Of Columbia":
+				return "DC";
+				break;
+			case "Florida":
+				return "FL";
+				break;
+			case "Georgia":
+				return "GA";
+				break;
+			case "Hawaii":
+				return "HI";
+				break;
+			case "Idaho":
+				return "ID";
+				break;
+			case "Illinois":
+				return "IL";
+				break;
+			case "Indiana":
+				return "IN";
+				break;
+			case "Iowa":
+				return "IA";
+				break;
+			case "Kansas":
+				return "KS";
+				break;
+			case "Kentucky":
+				return "KY";
+				break;
+			case "Louisiana":
+				return "LA";
+				break;
+			case "Maine":
+				return "ME";
+				break;
+			case "Maryland":
+				return "MD";
+				break;
+			case "Massachusetts":
+				return "MA";
+				break;
+			case "Michigan":
+				return "MI";
+				break;
+			case "Minnesota":
+				return "MN";
+				break;
+			case "Mississippi":
+				return "MS";
+				break;
+			case "Missouri":
+				return "MO";
+				break;
+			case "Montana":
+				return "MT";
+				break;
+			case "Nebraska":
+				return "NE";
+				break;
+			case "Nevada":
+				return "AL";
+				break;
+			case "New Hampshire":
+				return "NH";
+				break;
+			case "New Jersey":
+				return "NJ";
+				break;
+			case "New Mexico":
+				return "NM";
+				break;
+			case "New York":
+				return "NY";
+				break;
+			case "North Carolina":
+				return "NC";
+				break;
+			case "North Dakota":
+				return "ND";
+				break;
+			case "Ohio":
+				return "OH";
+				break;
+			case "Oklahoma":
+				return "OK";
+				break;
+			case "Oregon":
+				return "OR";
+				break;
+			case "Pennsylvania":
+				return "PA";
+				break;
+			case "Rhode Island":
+				return "RI";
+				break;
+			case "South Carolina":
+				return "SC";
+				break;
+			case "South Dakota":
+				return "SD";
+				break;
+			case "Tennessee":
+				return "TN";
+				break;
+			case "Texas":
+				return "TX";
+				break;
+			case "Utah":
+				return "UT";
+				break;
+			case "Vermont":
+				return "VT";
+				break;
+			case "Virginia":
+				return "VA";
+				break;
+			case "Washington":
+				return "WA";
+				break;
+			case "West Virginia":
+				return "WV";
+				break;
+			case "Wisconsin":
+				return "WI";
+				break;
+			case "Wyoming":
+				return "WY";
+				break;
+			default:
+				return "";			
+		}
+	}
+
+	function setLocalStorageFromSearchParameter() {
+	 // Clear absolutely everything stored in localStorage using localStorage.clear()
+      localStorage.clear();
+
+      // Store the username into localStorage using "localStorage.setItem"
+      localStorage.setItem("searchObj", JSON.stringify(searchObj));
+	}
+
+
+	function setSearchParametersFromLocalStorage() {
+		var tempSearchObj = JSON.parse(localStorage.getItem("searchObj"));
+		if (tempSearchObj) {	// check if local storage has data
+			searchObj = tempSearchObj;
+		}
+
+		// Category
+		if (searchObj.category) {
+			var categoryElement = "#" + searchObj.category;
+			$(categoryElement).attr("id", "categories-selected");
+		}
+		selectedCategory = searchObj.category;
+
+		// city
+		$("#city-input").val(searchObj.city);
+
+		// state
+		$("#state-input").val(searchObj.stateLongName);
+
+		// zip
+		$("#zip-input").val(searchObj.zip);
+
+		// radius
+		 $("#radius-input").val(searchObj.radius);
+
+		// from date
+		$("#from-date-input").val(searchObj.fromDateDisplay);
+
+		// to date
+		$("#to-date-input").val(searchObj.toDateDisplay);
+
+	} //setSearchParametersFromLocalStorage
+	
+
 
 	var apiKey;
 	var city
@@ -297,13 +605,12 @@ $(document).ready(function(){
 
 						$("#pop-up" + m).hide();
 
-
-
 						totalEvents = json.page.totalElements;
 
 
 						// console.log(moment(events[m].dates.start.localDate).format("dddd"));
 						console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
+            
 						var time = events[m].dates.start.localTime;
 						console.log(moment.parseZone(time)._i);
 						console.log("time: " + time)
@@ -367,7 +674,6 @@ $(document).ready(function(){
 						}
 					})
 
-
 					// to prevent additional pagination each time
 					$(".pagination").empty();
 
@@ -386,7 +692,9 @@ $(document).ready(function(){
 
 
 						for (var q = 0; q < numPages; q++) {
+
 							var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
+
 							pageList.attr("data-number", q);
 							if (q==currentPage){
 								pageList.addClass("active")
@@ -407,7 +715,6 @@ $(document).ready(function(){
 
 
 				console.log("queryUrl" + queryUrl);
-
 
 
           }, //close success
@@ -453,6 +760,8 @@ $(document).ready(function(){
 
 		console.log("locations: " + [locations])
 
+		setLocalStorageFromSearchParameter();
+
 	}); //submit click
 
 
@@ -470,12 +779,15 @@ $(document).ready(function(){
 
 		// remove active class from all page numbers 
 		//(this way we don't have to determine which page number was the last one clicked)
+    
 		$(".page-item").removeClass("active");
+
 		//add class "active" to the page numebr clicked
 		$(this).addClass("active");
 		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName + size + page;
 
 		//ajaxCall with the new page number in queryUrl
+
 		ajaxCall();
 
 	}); //page-button click
@@ -501,32 +813,103 @@ $(document).ready(function(){
 	// Search - form select
 	$('select').material_select();
 
+    $('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 15, // Creates a dropdown of 15 years to control year,
+	    today: 'Today',
+	    clear: 'Clear',
+	    close: 'Ok',
+	    closeOnSelect: true // Close upon selecting a date,
+  	});
 
-   //  $('.datepicker').pickadate({
-	  //   selectMonths: true, // Creates a dropdown to control month
-	  //   selectYears: 15, // Creates a dropdown of 15 years to control year,
-	  //   today: 'Today',
-	  //   clear: 'Clear',
-	  //   close: 'Ok',
-	  //   closeOnSelect: false // Close upon selecting a date,
-  	// });
 
-  	// Search - categories
-  	$(document).on("click", "#categories", function() {
-  		var selected = $("#categories-selected");
 
-  		if (selected) {
-  			selected.attr("id", "categories");
+  	  	// Search - categories
+  	$(document).on("click", ".categories", function() {
+  		var deselect = false;
+  		var newSelect = getCategory($(this).val());
+
+  		// remove previously selected category
+  		if (selectedCategory) {
+  			if (selectedCategory === newSelect) {
+  				deselect = true;
+  			}
+  			var selected = $("#categories-selected");
+  			selected.attr("id", selectedCategory);
+  			selectedCategory = "";
   		}
-  		$(this).attr("id", "categories-selected");
+
+  		// check for deselect
+  		if (deselect) {
+  			$(this).attr("id", newSelect);
+  			selectedCategory = "";
+  		}else {	// select new category
+  			$(this).attr("id", "categories-selected");
+  			selectedCategory = newSelect;
+  		}
+  		
   	});
 
-  	$(document).on("click", "#categories-selected", function() {
-  		$(this).attr("id", "categories");
-  	});
 
+  	// auto complete for state input
 
-
+  	 $(function() {
+  		$('#state-input').autocomplete({
+   		 data: {
+			"Alabama" : null,
+			"Alaska" : null,
+			"Arizona" : null,
+			"Arkansas" : null,
+			"California" : null,
+			"Colorado" : null,
+			"Connecticut" : null,
+			"Delaware" : null,
+			"District Of Columbia" : null,
+			"Florida" : null,
+			"Georgia" : null,
+			"Hawaii" : null,
+			"Idaho" : null,
+			"Illinois" : null,
+			"Indiana" : null,
+			"Iowa" : null,
+			"Kansas" : null,
+			"Kentucky" : null,
+			"Louisiana" : null,
+			"Maine" : null,
+			"Maryland" : null,
+			"Massachusetts" : null,
+			"Michigan" : null,
+			"Minnesota" : null,
+			"Mississippi" : null,
+			"Missouri" : null,
+			"Montana" : null,
+			"Nebraska" : null,
+			"Nevada" : null,
+			"New Hampshire" : null,
+			"New Jersey" : null,
+			"New Mexico" : null,
+			"New York" : null,
+			"North Carolina" : null,
+			"North Dakota" : null,
+			"Ohio" : null,
+			"Oklahoma" : null,
+			"Oregon" : null,
+			"Pennsylvania" : null,
+			"Rhode Island" : null,
+			"South Carolina" : null,
+			"South Dakota" : null,
+			"Tennessee" : null,
+			"Texas" : null,
+			"Utah" : null,
+			"Vermont" : null,
+			"Virginia" : null,
+			"Washington" : null,
+			"West Virginia" : null,
+			"Wisconsin" : null,
+			"Wyoming" : null
+    		}
+  		});
+	}); 
 
 
 }); //document.ready
