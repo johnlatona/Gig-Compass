@@ -65,6 +65,10 @@ $(document).ready(function(){
 
 	var selectedCategory = "";
 
+	var mouseDownCordinates = [];
+
+
+
 
 	setSearchParametersFromLocalStorage();
 
@@ -570,10 +574,9 @@ $(document).ready(function(){
 	      startingTop: '4%', // Starting top style attribute
 	      endingTop: '15%', // Ending top style attribute
 	      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-	      	console.log(modal, trigger);
 	      },
 	      complete: function() { 
-
+	      	setTimeout(delayClick, 200); 
 	      } // Callback for Modal close
  	 });
 
@@ -679,6 +682,36 @@ $(document).ready(function(){
     		}
   		});
 	}); 
+
+
+  	 	
+  	 	
+  	 function delayClick() {
+  	 	console.log("30 seconds");
+  	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
+  	 	// $('#modal-categories').modal('open');
+  	 }
+
+
+  	 $('body').mousedown(function(e) {
+  				mouseDownCordinates[0] = e.clientX;
+  				mouseDownCordinates[1] = e.clientY;
+	});
+
+
+  	 function click(x,y){
+    var ev = document.createEvent("MouseEvent");
+    var el = document.elementFromPoint(x,y);
+    ev.initMouseEvent(
+        "click",
+        true /* bubble */, true /* cancelable */,
+        window, null,
+        x, y, x, y, /* coordinates */
+        false, false, false, false, /* modifier keys */
+        0 /*left*/, null
+    );
+    el.dispatchEvent(ev);
+}
 
 
 

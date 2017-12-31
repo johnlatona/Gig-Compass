@@ -44,12 +44,12 @@ select:invalid {
 #modal-categories {
   position:fixed;
   margin:0px;
-  padding: 5px;
+  padding: 10px;
   top: 64px !important;
   left: 60%;
-  border-radius:1px;
+  border-radius:5px;
   width: 16.5% !important ; 
-  height: 33.5% !important ;
+  height: 35% !important ;
   font-weight: bold;
   color: #757575;
 }
@@ -61,7 +61,7 @@ select:invalid {
   padding-top: 20px;
   top: 64px !important;
   left: 80%;
-  border-radius:1px;
+  border-radius:5px;
   width: 18% !important ; 
   height: 30% !important ;
 }
@@ -72,7 +72,7 @@ select:invalid {
   padding: 0px;
   top: 64px !important;
   left: 70%;
-  border-radius:1px;
+  border-radius:5px;
   width: 17% !important ; 
   height: 34% !important ;
 }
