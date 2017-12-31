@@ -576,7 +576,7 @@ $(document).ready(function(){
 	      ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 	      },
 	      complete: function() { 
-	      	setTimeout(delayClick, 200); 
+	      	setTimeout(delayClick, 200); // add click to invoke icon click if mouse on icon position
 	      } // Callback for Modal close
  	 });
 
@@ -595,8 +595,7 @@ $(document).ready(function(){
   	});
 
 
-
-  	  	// Search - categories
+  	// Select and deselect search categories
   	$(document).on("click", ".categories", function() {
   		var deselect = false;
   		var newSelect = getCategory($(this).val());
@@ -683,35 +682,32 @@ $(document).ready(function(){
   		});
 	}); 
 
-
   	 	
-  	 	
-  	 function delayClick() {
+  	 function delayClick() {  // open menu modal if x,y coordinates are on icon
   	 	console.log("30 seconds");
   	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
-  	 	// $('#modal-categories').modal('open');
   	 }
 
 
-  	 $('body').mousedown(function(e) {
-  				mouseDownCordinates[0] = e.clientX;
-  				mouseDownCordinates[1] = e.clientY;
+  	$('body').mousedown(function(e) {  // keepp track of mouse down coordinates to open menu modal
+		mouseDownCordinates[0] = e.clientX;
+		mouseDownCordinates[1] = e.clientY;
 	});
 
 
-  	 function click(x,y){
-    var ev = document.createEvent("MouseEvent");
-    var el = document.elementFromPoint(x,y);
-    ev.initMouseEvent(
-        "click",
-        true /* bubble */, true /* cancelable */,
-        window, null,
-        x, y, x, y, /* coordinates */
-        false, false, false, false, /* modifier keys */
-        0 /*left*/, null
-    );
-    el.dispatchEvent(ev);
-}
+	function click(x,y){  // simulate  click
+		var ev = document.createEvent("MouseEvent");
+		var el = document.elementFromPoint(x,y);
+		ev.initMouseEvent(
+			"click",
+			true /* bubble */, true /* cancelable */,
+			window, null,
+			x, y, x, y, /* coordinates */
+			false, false, false, false, /* modifier keys */
+			0 /*left*/, null
+		);
+		el.dispatchEvent(ev);
+	}
 
 
 
