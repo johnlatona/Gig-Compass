@@ -21,7 +21,6 @@ function initGoogleMap() {
 	}    
 }; // initGoogleMap
 
-
 $(document).ready(function(){
 
 	var string = "1.6525625";
