@@ -60,17 +60,46 @@ select:invalid {
   height: 30% !important ;
 }
 
-#modal-categories {
-  position:fixed;
+ #categories,
+#categories-selected{
+	height: 40px;
+	width: 300px;
+/*	padding-left: 10px;
+	padding-top: 0px;*/
+
+} 
+
+/* #cspan {
+	padding-bottom: 20px;
+}*/
+
+#categories-icons {
+	display: inline;
+} 
+ 
+
+#search-categories {
+	position: relative;
+}
+
+#modal-categories { 
+  position: absolute;
   margin:0px;
   padding: 5px;
   top: 64px !important;
-  left: 850px;
   border-radius:1px;
-  width: 16.5% !important ; 
-  height: 33.5% !important ;
+  width: 240px;
+  height: 215px;
   font-weight: bold;
   color: #757575;
+}
+
+.collection {
+	position: relative;
+}
+
+.modal {
+	max-height: 900px;
 }
 
 input[type='range']
