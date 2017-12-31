@@ -23,6 +23,7 @@ function initGoogleMap() {
 }; // initGoogleMap
 
 
+
 $(document).ready(function(){
 
 	var string = "1.6525625";
@@ -53,15 +54,19 @@ $(document).ready(function(){
 			category : "",
 			city : "",
 			state : "",
+			stateLongName : "",
 			zip : "",
 			radius : 5,
-			fromDate : moment(),
-			toDate : moment()
+			fromDate : "",
+			fromDateDisplay : "",
+			toDate : "",
+			toDateDisplay : ""
 		}
 
+	var selectedCategory = "";
 
 
-	setSearchParametersWithLocalStorage();
+	setSearchParametersFromLocalStorage();
 
 	console.log("numperpage" + numPerPage)
 
@@ -81,8 +86,8 @@ $(document).ready(function(){
 		searchObj.city = $("#city-input").val();
 
 		// state
-		searchObj.state = $("#state-input").val();
-		searchObj.state = getStateCode(searchObj.state);
+		searchObj.stateLongName = $("#state-input").val();
+		searchObj.state = getStateCode(searchObj.stateLongName);
 
 		// zip
 		searchObj.zip = $("#zip-input").val();
@@ -92,23 +97,21 @@ $(document).ready(function(){
 
 		// from date
 		searchObj.fromDate = $("#from-date-input").val();
-		console.log("from Date " + searchObj.fromDate);
 		if (!searchObj.fromDate == "") {
+			searchObj.fromDateDisplay = searchObj.fromDate;
 			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.fromDateDisplay = "";
 		}
-		console.log("from Date " + searchObj.fromDate);
-		
-		// moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		// to date
 		searchObj.toDate = $("#to-date-input").val();
-		console.log("to Date " + searchObj.toDate);
 		if (!searchObj.toDate == "") {
-			searchObj.toDate = moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+			searchObj.toDateDisplay = searchObj.toDate;
+			searchObj.toDate =  moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.toDateDisplay = "";
 		}
-		console.log("to Date " + searchObj.toDate);
-
-		// searchObj.toDate = moment().add(7, 'days').format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		console.log(searchObj);
 
@@ -293,7 +296,7 @@ $(document).ready(function(){
 		}
 	}
 
-	function setSearchParametersToLocalStorage() {
+	function setLocalStorageFromSearchParameter() {
 	 // Clear absolutely everything stored in localStorage using localStorage.clear()
       localStorage.clear();
 
@@ -301,14 +304,40 @@ $(document).ready(function(){
       localStorage.setItem("searchObj", JSON.stringify(searchObj));
 	}
 
-	function setSearchParametersWithLocalStorage() {
+
+	function setSearchParametersFromLocalStorage() {
 		var tempSearchObj = JSON.parse(localStorage.getItem("searchObj"));
 		if (tempSearchObj) {	// check if local storage has data
 			searchObj = tempSearchObj;
 		}
 
-		console.log(searchObj);
-	}
+		// Category
+		if (searchObj.category) {
+			var categoryElement = "#" + searchObj.category;
+			$(categoryElement).attr("id", "categories-selected");
+		}
+		selectedCategory = searchObj.category;
+
+		// city
+		$("#city-input").val(searchObj.city);
+
+		// state
+		$("#state-input").val(searchObj.stateLongName);
+
+		// zip
+		$("#zip-input").val(searchObj.zip);
+
+		// radius
+		 $("#radius-input").val(searchObj.radius);
+
+		// from date
+		$("#from-date-input").val(searchObj.fromDateDisplay);
+
+		// to date
+		$("#to-date-input").val(searchObj.toDateDisplay);
+
+	} //setSearchParametersFromLocalStorage
+	
 
 
 	function clearLocations() {
@@ -504,7 +533,7 @@ $(document).ready(function(){
 
 		console.log("locations: " + [locations])
 
-		setSearchParametersToLocalStorage();
+		setLocalStorageFromSearchParameter();
 
 	}); //submit click
 
@@ -562,18 +591,32 @@ $(document).ready(function(){
 	    closeOnSelect: true // Close upon selecting a date,
   	});
 
-  	// Search - categories
-  	$(document).on("click", "#categories", function() {
-  		var selected = $("#categories-selected");
 
-  		if (selected) {
-  			selected.attr("id", "categories");
+
+  	  	// Search - categories
+  	$(document).on("click", ".categories", function() {
+  		var deselect = false;
+  		var newSelect = getCategory($(this).val());
+
+  		// remove previously selected category
+  		if (selectedCategory) {
+  			if (selectedCategory === newSelect) {
+  				deselect = true;
+  			}
+  			var selected = $("#categories-selected");
+  			selected.attr("id", selectedCategory);
+  			selectedCategory = "";
   		}
-  		$(this).attr("id", "categories-selected");
-  	});
 
-  	$(document).on("click", "#categories-selected", function() {
-  		$(this).attr("id", "categories");
+  		// check for deselect
+  		if (deselect) {
+  			$(this).attr("id", newSelect);
+  			selectedCategory = "";
+  		}else {	// select new category
+  			$(this).attr("id", "categories-selected");
+  			selectedCategory = newSelect;
+  		}
+  		
   	});
 
 
