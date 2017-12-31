@@ -63,6 +63,8 @@ $(document).ready(function(){
 			toDateDisplay : ""
 		}
 
+	var selectedCategory = "";
+
 
 	setSearchParametersFromLocalStorage();
 
@@ -302,25 +304,19 @@ $(document).ready(function(){
       localStorage.setItem("searchObj", JSON.stringify(searchObj));
 	}
 
+
 	function setSearchParametersFromLocalStorage() {
 		var tempSearchObj = JSON.parse(localStorage.getItem("searchObj"));
 		if (tempSearchObj) {	// check if local storage has data
 			searchObj = tempSearchObj;
 		}
 
-		console.log("---------------setSearchParametersFromLocalStorage-------------------------------");
-
-		console.log(searchObj);
-
 		// Category
-		if (!searchObj.category) {
-
+		if (searchObj.category) {
+			var categoryElement = "#" + searchObj.category;
+			$(categoryElement).attr("id", "categories-selected");
 		}
-		// searchObj.category = "";
-		// if ($("#categories-selected")) {
-		// 	searchObj.category  = $("#categories-selected").val();
-		// 	searchObj.category = getCategory(searchObj.category);
-		// } 
+		selectedCategory = searchObj.category;
 
 		// city
 		$("#city-input").val(searchObj.city);
@@ -339,9 +335,9 @@ $(document).ready(function(){
 
 		// to date
 		$("#to-date-input").val(searchObj.toDateDisplay);
-	
 
 	} //setSearchParametersFromLocalStorage
+	
 
 
 	function clearLocations() {
@@ -595,44 +591,33 @@ $(document).ready(function(){
 	    closeOnSelect: true // Close upon selecting a date,
   	});
 
-  	// Search - categories
-  	$(document).on("click", "#categories", function() {
+
+
+  	  	// Search - categories
+  	$(document).on("click", ".categories", function() {
+  		var deselect = false;
+  		var newSelect = getCategory($(this).val());
+
   		// remove previously selected category
-  		var selected = $("#categories-selected");
-
-  		if (selected) {
-  			selected.attr("id", "categories");
+  		if (selectedCategory) {
+  			if (selectedCategory === newSelect) {
+  				deselect = true;
+  			}
+  			var selected = $("#categories-selected");
+  			selected.attr("id", selectedCategory);
+  			selectedCategory = "";
   		}
-  		$(this).attr("id", "categories-selected");
-  	});
 
-  	$(document).on("click", "#categories-selected", function() {
-  		$(this).attr("id", "categories");
-  	});
-
-
-  	/*  	// Search - categories
-  	$(document).on("click", ".collection-item", function() {
+  		// check for deselect
+  		if (deselect) {
+  			$(this).attr("id", newSelect);
+  			selectedCategory = "";
+  		}else {	// select new category
+  			$(this).attr("id", "categories-selected");
+  			selectedCategory = newSelect;
+  		}
   		
-  		// remove previously selected category
-  		if (!selectedCategory) {
-  			var selected = $("#categories-selected " + selectedCategory);
-  			selected.attr("id", "categories " + selectedCategory);
-  		}
-
-  		// select clicked category
-  		var selectedValue = $(this).val();
-  		selectedCategory = getCategory(selectedValue);
-  		$(this).attr("id", "categories-selected " + selectedCategory);
   	});
-  	
-
-  	$(document).on("click", "#categories-selected", function() {
-  		var selectedValue = $(this).val();
-  		var selectedText = getCategory(selectedValue);
-  		selectedCategory = "";
-  		$(this).attr("id", "categories " + selectedText);
-  	});*/
 
 
   	// auto complete for state input
