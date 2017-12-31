@@ -59,6 +59,9 @@ $(document).ready(function(){
 		}
 
 
+
+	setSearchParametersWithLocalStorage();
+
 	console.log("numperpage" + numPerPage)
 
 
@@ -289,6 +292,23 @@ $(document).ready(function(){
 		}
 	}
 
+	function setSearchParametersToLocalStorage() {
+	 // Clear absolutely everything stored in localStorage using localStorage.clear()
+      localStorage.clear();
+
+      // Store the username into localStorage using "localStorage.setItem"
+      localStorage.setItem("searchObj", JSON.stringify(searchObj));
+	}
+
+	function setSearchParametersWithLocalStorage() {
+		var tempSearchObj = JSON.parse(localStorage.getItem("searchObj"));
+		if (tempSearchObj) {	// check if local storage has data
+			searchObj = tempSearchObj;
+		}
+
+		console.log(searchObj);
+	}
+
 
 	function clearLocations() {
 		locations = [];
@@ -482,6 +502,8 @@ $(document).ready(function(){
 
 
 		console.log("locations: " + [locations])
+
+		setSearchParametersToLocalStorage();
 
 	}); //submit click
 
