@@ -23,6 +23,7 @@ function initGoogleMap() {
 }; // initGoogleMap
 
 
+
 $(document).ready(function(){
 
 	var string = "1.6525625";
@@ -53,15 +54,17 @@ $(document).ready(function(){
 			category : "",
 			city : "",
 			state : "",
+			stateLongName : "",
 			zip : "",
 			radius : 5,
-			fromDate : moment(),
-			toDate : moment()
+			fromDate : "",
+			fromDateDisplay : "",
+			toDate : "",
+			toDateDisplay : ""
 		}
 
 
-
-	setSearchParametersWithLocalStorage();
+	setSearchParametersFromLocalStorage();
 
 	console.log("numperpage" + numPerPage)
 
@@ -81,8 +84,8 @@ $(document).ready(function(){
 		searchObj.city = $("#city-input").val();
 
 		// state
-		searchObj.state = $("#state-input").val();
-		searchObj.state = getStateCode(searchObj.state);
+		searchObj.stateLongName = $("#state-input").val();
+		searchObj.state = getStateCode(searchObj.stateLongName);
 
 		// zip
 		searchObj.zip = $("#zip-input").val();
@@ -92,23 +95,21 @@ $(document).ready(function(){
 
 		// from date
 		searchObj.fromDate = $("#from-date-input").val();
-		console.log("from Date " + searchObj.fromDate);
 		if (!searchObj.fromDate == "") {
+			searchObj.fromDateDisplay = searchObj.fromDate;
 			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.fromDateDisplay = "";
 		}
-		console.log("from Date " + searchObj.fromDate);
-		
-		// moment().format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		// to date
 		searchObj.toDate = $("#to-date-input").val();
-		console.log("to Date " + searchObj.toDate);
 		if (!searchObj.toDate == "") {
-			searchObj.toDate = moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+			searchObj.toDateDisplay = searchObj.toDate;
+			searchObj.toDate =  moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+		} else {
+			searchObj.toDateDisplay = "";
 		}
-		console.log("to Date " + searchObj.toDate);
-
-		// searchObj.toDate = moment().add(7, 'days').format("YYYY-MM-DDTHH:mm:ss") + "Z";
 
 		console.log(searchObj);
 
@@ -293,7 +294,7 @@ $(document).ready(function(){
 		}
 	}
 
-	function setSearchParametersToLocalStorage() {
+	function setLocalStorageFromSearchParameter() {
 	 // Clear absolutely everything stored in localStorage using localStorage.clear()
       localStorage.clear();
 
@@ -301,14 +302,46 @@ $(document).ready(function(){
       localStorage.setItem("searchObj", JSON.stringify(searchObj));
 	}
 
-	function setSearchParametersWithLocalStorage() {
+	function setSearchParametersFromLocalStorage() {
 		var tempSearchObj = JSON.parse(localStorage.getItem("searchObj"));
 		if (tempSearchObj) {	// check if local storage has data
 			searchObj = tempSearchObj;
 		}
 
+		console.log("---------------setSearchParametersFromLocalStorage-------------------------------");
+
 		console.log(searchObj);
-	}
+
+		// Category
+		if (!searchObj.category) {
+
+		}
+		// searchObj.category = "";
+		// if ($("#categories-selected")) {
+		// 	searchObj.category  = $("#categories-selected").val();
+		// 	searchObj.category = getCategory(searchObj.category);
+		// } 
+
+		// city
+		$("#city-input").val(searchObj.city);
+
+		// state
+		$("#state-input").val(searchObj.stateLongName);
+
+		// zip
+		$("#zip-input").val(searchObj.zip);
+
+		// radius
+		 $("#radius-input").val(searchObj.radius);
+
+		// from date
+		$("#from-date-input").val(searchObj.fromDateDisplay);
+
+		// to date
+		$("#to-date-input").val(searchObj.toDateDisplay);
+	
+
+	} //setSearchParametersFromLocalStorage
 
 
 	function clearLocations() {
@@ -504,7 +537,7 @@ $(document).ready(function(){
 
 		console.log("locations: " + [locations])
 
-		setSearchParametersToLocalStorage();
+		setLocalStorageFromSearchParameter();
 
 	}); //submit click
 
@@ -564,6 +597,7 @@ $(document).ready(function(){
 
   	// Search - categories
   	$(document).on("click", "#categories", function() {
+  		// remove previously selected category
   		var selected = $("#categories-selected");
 
   		if (selected) {
@@ -575,6 +609,30 @@ $(document).ready(function(){
   	$(document).on("click", "#categories-selected", function() {
   		$(this).attr("id", "categories");
   	});
+
+
+  	/*  	// Search - categories
+  	$(document).on("click", ".collection-item", function() {
+  		
+  		// remove previously selected category
+  		if (!selectedCategory) {
+  			var selected = $("#categories-selected " + selectedCategory);
+  			selected.attr("id", "categories " + selectedCategory);
+  		}
+
+  		// select clicked category
+  		var selectedValue = $(this).val();
+  		selectedCategory = getCategory(selectedValue);
+  		$(this).attr("id", "categories-selected " + selectedCategory);
+  	});
+  	
+
+  	$(document).on("click", "#categories-selected", function() {
+  		var selectedValue = $(this).val();
+  		var selectedText = getCategory(selectedValue);
+  		selectedCategory = "";
+  		$(this).attr("id", "categories " + selectedText);
+  	});*/
 
 
   	// auto complete for state input
