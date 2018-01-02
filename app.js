@@ -40,6 +40,8 @@ $(document).ready(function(){
 	var zipCode;
 	var keyword; 
 	var radius; 
+	var startDateTime;
+	var EndDateTime;
 	var classificationName;
 	var size;
 	var page;
@@ -57,8 +59,8 @@ $(document).ready(function(){
 			state : "",
 			zip : "",
 			radius : 5,
-			fromDate : moment(),
-			toDate : moment()
+			fromDate : "",
+			toDate : ""
 		}
 
 	var popUpIdArr = [];
@@ -100,7 +102,7 @@ $(document).ready(function(){
 		searchObj.fromDate = $("#from-date-input").val();
 		if (!searchObj.fromDate == "") {
 			searchObj.fromDateDisplay = searchObj.fromDate;
-			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+			searchObj.fromDate = moment(searchObj.fromDate).format("YYYY-MM-DD") + moment(searchObj.fromDate).format("THH:mm:ss") + "Z";
 		} else {
 			searchObj.fromDateDisplay = "";
 		}
@@ -109,7 +111,7 @@ $(document).ready(function(){
 		searchObj.toDate = $("#to-date-input").val();
 		if (!searchObj.toDate == "") {
 			searchObj.toDateDisplay = searchObj.toDate;
-			searchObj.toDate =  moment(searchObj.toDate).format("YYYY-MM-DDTHH:mm:ss") + "Z";
+			searchObj.toDate =  moment(searchObj.toDate).format("YYYY-MM-DD") +  moment(searchObj.toDate).format("THH:mm:ss") + "Z";
 		} else {
 			searchObj.toDateDisplay = "";
 		}
@@ -645,6 +647,10 @@ $(document).ready(function(){
 
 		setSearchParameters();
 
+		if (!isDateRangeValid()) {
+			return false;
+		}
+
 		clearLocations();
 
 		$(".pop-up-event").remove();
@@ -660,13 +666,16 @@ $(document).ready(function(){
 		zipCode = "&postalCode=" + searchObj.zip;
 		keyword = "&keyword=" + searchObj.keyword; 
 		radius = "&radius=" + searchObj.radius; 
+		startDateTime = "&startDateTime" + searchObj.fromDate;
+		endDateTime = "&endDateTime" + searchObj.toDate;
 		classificationName = "&classificationName=" + searchObj.category;
 
 
 		size = "&size=" + numPerPage;
 		page = "&page=" + currentPage;
 
-		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName + size + page;
+		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + startDateTime + endDateTime + classificationName + size + page;
+
 
 		ajaxCall();
 
@@ -851,6 +860,14 @@ $(document).ready(function(){
 	$("#keyword-input").on("click", function() {
 		$(this).focus(); 
 	});
+
+	function isDateRangeValid() {
+		if (searchObj.toDateDisplay < searchObj.fromDateDisplay) {
+			console.log("Please enter valid date range");
+			return false;
+		}
+		return true;
+	}
 
 
 
