@@ -660,6 +660,7 @@ $(document).ready(function(){
 		setSearchParameters();
 
 		if (!isDateRangeValid()) {
+			errorCall("<h5>Please enter a valid date range</h5>");
 			return false;
 		}
 
@@ -678,8 +679,8 @@ $(document).ready(function(){
 		zipCode = "&postalCode=" + searchObj.zip;
 		keyword = "&keyword=" + searchObj.keyword; 
 		radius = "&radius=" + searchObj.radius; 
-		startDateTime = "&startDateTime" + searchObj.fromDate;
-		endDateTime = "&endDateTime" + searchObj.toDate;
+		startDateTime = "&startDateTime=" + searchObj.fromDate;
+		endDateTime = "&endDateTime=" + searchObj.toDate;
 		classificationName = "&classificationName=" + searchObj.category;
 
 
