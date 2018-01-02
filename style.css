@@ -36,11 +36,6 @@ hr {
   border: 1px solid #000000;
 }
 
-#title {
-  margin: 0;
-  padding: 0;
-}
-
 #main-content {
   padding: 0;
   margin: 0;
@@ -76,8 +71,13 @@ hr {
   top: 0;
   left: 0;
   padding: 1.5vw;
+  /*padding-top:1.25vw;*/
   height: 7vw;
   z-index: 1;
+}
+
+nav{
+    background-color: #0d47a1;
 }
 
 #search-bar {
@@ -87,12 +87,16 @@ hr {
 
 #compass {
   font-size: 5vw;
+  position:relative;
+  bottom:10px;
 }
 
 #title {
   font-size: 3vw;
+  /*padding: 0;*/
   padding-left: 2vw;
   font-style: italic;
+  margin: 0;  
 }
 
 .par-display{
@@ -128,7 +132,7 @@ select:invalid {
   margin-bottom: 0px;
 }
 
-.input-fieldn {
+.input-field {
   font-family: 'Prompt', sans-serif;
   margin-top: 20px;
 }
@@ -383,4 +387,70 @@ nav a:link{
 
 .close-error:hover {
   background-color: #C4C4C4;
+}
+
+
+@media only screen and (max-width: 1070px) {
+  #keyword-input {
+	  width: 220px;
+	  margin-bottom: 0;
+	  position: relative;
+	  bottom:10px;
+  }
+
+  #titleText{
+		position:relative;
+  	top:5px;
+	}
+
+}
+
+@media only screen and (max-width: 865px) {
+ 
+ #titleText{
+		position:relative;
+  	top:7px;
+	}
+}
+
+
+@media only screen and (max-width: 730px) {
+  #titleText{
+		position:relative;
+		top:10px;
+	}
+
+  #keyword-input {
+    width: 190px;
+  }
+
+  .navIcons{
+  	padding-left:0;
+  	padding-right:5px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+	#keyword-input {
+    width: 190px;
+
+  }
+
+  .navIcons{
+  	padding-left:0;
+  	padding-right:5px;
+  }
+
+}
+
+
+@media only screen and (max-width: 565px) {
+	#keyword-input {
+    width: 180px;
+
+  }
+
+	.sendIcon{
+		padding-right:5px ;
+	}
 }

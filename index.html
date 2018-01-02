@@ -26,17 +26,22 @@
 		<div id="header">
 			<nav>
 				<div class="nav-wrapper blue-container" id="nav-bar">
-					<h1 class="brand-logo" id="title">GigCompass<i class="material-icons right" id="compass">explore</i></h1>
-					<ul class="right hide-on-med-and-down" id="search-bar">
+					<h1 class="brand-logo left" id="title"><span id="titleText">GigCompass</span><i class="material-icons right" id="compass">explore</i></h1>
+     
+      
+					<ul class="right" id="search-bar">
 						<li> <input id="keyword-input" type="search" value="" placeholder="What are you looking for?"></li>
-						<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
-						<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
-						<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
-						<li id="submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
+						<li><a class="waves-effect waves-light model-action modal-trigger navIcons" href="#modal-categories"><span class="hide-on-med-and-down">Categories</span><i class="material-icons right">view_module</i></a></li>
+						<li><a class="waves-effect waves-light modal-trigger navIcons" href="#modal-location"><span class="hide-on-med-and-down">Location</span><i class="material-icons right">location_city</i></a></li>
+						<li><a class="waves-effect waves-light modal-trigger navIcons" href="#modal-daterange"><span class="hide-on-med-and-down">Date Range</span><i class="material-icons right">date_range</i></a></li>
+						<li id="submit"><a class="sendIcon" href="collapsible.html"><i class="large material-icons">send</i></a></li>
 					</ul>
+
 				</div>
 			</nav>
-			<div class="row error-pop-up-row">
+                    
+     
+    	<div class="row error-pop-up-row">
 				<div class="col-xs-8 col-xs-offset-2">
 					<div class="error-pop-up">
 						<button type="button" class="close-error">X</button>
