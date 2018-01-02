@@ -361,6 +361,7 @@ nav a:link{
 }
 
 .error-pop-up {
+  position: static;
   background-color: rgba(255, 255, 255, 0.95);
   height: 10vw;
   margin-top: 10vw;
@@ -369,6 +370,7 @@ nav a:link{
   padding-left: 1vw;
   padding-right: 1vw;
   text-align: center;
+  z-index: 1;
 }
 
 .close-error {
