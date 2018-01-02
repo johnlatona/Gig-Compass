@@ -684,8 +684,7 @@ $(document).ready(function(){
 
   	 	
   	 function delayClick() {  // open menu modal if x,y coordinates are on icon
-  	 	console.log("30 seconds");
-  	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
+  	 	click(mouseDownCordinates[0], mouseDownCordinates[1]);
   	 }
 
 
@@ -708,6 +707,12 @@ $(document).ready(function(){
 		);
 		el.dispatchEvent(ev);
 	}
+
+
+	// force focus when modal is open and click on input field
+	$("#keyword-input").on("click", function() {
+		$(this).focus(); 
+	});
 
 
 
