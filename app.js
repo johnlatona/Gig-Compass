@@ -1,4 +1,3 @@
-
 var locations =[];
 
 var marker;
@@ -6,7 +5,7 @@ var marker;
 function initGoogleMap() {
 	console.log(locations);
 	var map = new google.maps.Map(document.getElementById("map"), {
-		zoom: 15,
+		zoom: 12,
 		center: {lat: locations[0].lat, lng: locations[0].lng}
 	})
 
@@ -23,8 +22,9 @@ function initGoogleMap() {
 }; // initGoogleMap
 
 
-
 $(document).ready(function(){
+
+	$(".background-opacity").hide();
 
 	var string = "1.6525625";
 	var number = parseFloat(string);
@@ -33,6 +33,7 @@ $(document).ready(function(){
 	console.log(number);
 
 	var events;
+
 	var apiKey;
 	var city
 	var state;
@@ -54,21 +55,17 @@ $(document).ready(function(){
 			category : "",
 			city : "",
 			state : "",
-			stateLongName : "",
 			zip : "",
 			radius : 5,
-			fromDate : "",
-			fromDateDisplay : "",
-			toDate : "",
-			toDateDisplay : ""
+			fromDate : moment(),
+			toDate : moment()
 		}
+
+	var popUpIdArr = [];
 
 	var selectedCategory = "";
 
 	var mouseDownCordinates = [];
-
-
-
 
 	setSearchParametersFromLocalStorage();
 
@@ -341,8 +338,6 @@ $(document).ready(function(){
 		$("#to-date-input").val(searchObj.toDateDisplay);
 
 	} //setSearchParametersFromLocalStorage
-	
-
 
 	function clearLocations() {
 		locations = [];
@@ -404,13 +399,23 @@ $(document).ready(function(){
 
 						var eventDisplay = $("<div>").addClass("event");
 
-						var eventUrl = $("<a>").addClass("event-link");
-						eventUrl.attr("href", events[m].url)
-						eventUrl.attr("target", "_blank")
-						
-						var eventName = $("<span>").addClass("name-display");
-						eventName.append(events[m].name);
-						eventUrl.append(eventName);
+						eventDisplay.attr("data-pop-up-id", "#pop-up" + m)
+
+						var eventRow = $("<div>");
+						eventRow.addClass("row");
+
+						eventColOne = $("<div>").addClass("col-xs-4");
+
+						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
+						eventPic.addClass("image-display");
+
+						eventColOne.append(eventPic);
+
+						var eventColTwo = $("<div>").addClass("col-xs-8");
+
+						var eventTitle = $("<h5>");
+						eventTitle.addClass("name-display");
+						eventTitle.append(events[m].name);
 
 						var par = $("<p>");
 
@@ -423,21 +428,95 @@ $(document).ready(function(){
 						var eventVenue = $("<span>").addClass("venue-display");
 						eventVenue.append("<br>"+ events[m]._embedded.venues[0].name);
 
-						var eventAddress = $("<span>").addClass("venu-address1-display");
-						eventAddress.append("<br>" + events[m]._embedded.venues[0].address.line1);
-						
-						var eventCity = $("<span>").addClass("venue-city-display");
-						eventCity.append("<br>" + events[m]._embedded.venues[0].city.name + ", " + 
-							events[m]._embedded.venues[0].state.stateCode + " " +
-							events[m]._embedded.venues[0].postalCode);
-
-						par.append(eventDate, eventVenue, eventAddress, eventCity);
+						par.append(eventDate, eventVenue);
 						par.addClass("par-display");
-						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
-						eventPic.addClass("image-display");
-						eventDisplay.append(eventUrl, par, eventPic);
 
+						eventColTwo.append(eventTitle, par);
+						eventRow.append(eventColOne, eventColTwo);
+						eventDisplay.append(eventRow);
 						$("#event-list").append(eventDisplay);
+
+
+						// console.log(moment(events[m].dates.start.localDate).format("dddd"));
+						console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
+						var time = events[m].dates.start.localTime;
+						console.log(moment.parseZone(time)._i);
+						console.log("time: " + time)
+						console.log(moment(time, "HH:mm a"));
+
+						var popUpEvent = $("<div>");
+						//Adds class="pop-up-event" to each new pop up div
+						popUpEvent.addClass("col-md-10 col-md-offset-1 pop-up-event");
+						//Adds a pop up number id corresponding to each index number of the events array.
+						popUpEvent.attr("id", "pop-up" + m);
+						//Creates a new content div for each pop up
+						var popUpContent = $("<div>");
+						popUpContent.addClass("pop-up-content container-fluid");
+						//first row content in pop up: Event name, date and time, and a button to close the pop up
+						var firstRow = $("<div>");
+						firstRow.addClass("row");
+						firstRow.attr("id", "pop-up-header");
+						var firstRowColOne = $("<div>");
+						firstRowColOne.addClass("col-xs-11");
+						var popUpHeading = $("<h3>");
+						popUpHeading.text(events[m].name);
+						var expandedEventDateTime = $("<p>");
+						expandedEventDateTime.text(moment(events[m].dates.start.localDate).format("dddd, MMMM Do, YYYY") + " at " + moment(convertedTime).format("h:mm A"));
+						firstRowColOne.append(popUpHeading, expandedEventDateTime);
+						var firstRowColTwo = $("<div>");
+						firstRowColTwo.addClass("col-xs-1");
+						var closeButton = $("<button>");
+						closeButton.addClass("waves-effect waves-green btn-flat close-button col-xs-1");
+						closeButton.text("X");
+						firstRowColTwo.append(closeButton);
+						firstRow.append(firstRowColOne, firstRowColTwo);
+						//second row content in pop up: event picture, venue name, and address
+						var secondRow = $("<div>");
+						secondRow.addClass("row");
+						var secondRowColOne = $("<div>");
+						secondRowColOne.addClass("col-xs-5");
+						var popUpImg = $('<img src="' + events[m].images[2].url + '" alt="' + events[m].name + '" class="pop-up-img">');
+						secondRowColOne.append(popUpImg);
+						var secondRowColTwo = $("<div>");
+						secondRowColTwo.addClass("col-xs-7");
+						secondRowColTwo.html('<h4>' + events[m]._embedded.venues[0].name + "</h4><br><h6>Address:</h6><br><p>" + events[m]._embedded.venues[0].address.line1 + "</p><p>" + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + " " +
+						events[m]._embedded.venues[0].postalCode + "</p>");
+						secondRow.append(secondRowColOne, secondRowColTwo);
+						//third row content pop up: purchase tickets button
+						var thirdRow = $("<div>")
+						thirdRow.addClass("row");
+						var thirdRowColOne = $("<div>");
+						thirdRowColOne.addClass("col-xs-12");
+						var purchaseButton = $("<button>");
+						purchaseButton.addClass("purchase-button");
+						purchaseButton.attr("data-url", events[m].url);
+						purchaseButton.text("Purchase Tickets");
+						thirdRow.append(purchaseButton);
+						//Pop up Footer: Next and Previous buttons to cycle through event pop ups.
+						var popUpFooter = $("<div>");
+						popUpFooter.addClass("pop-up-footer");
+						var previousButton = $("<button>");
+						previousButton.addClass("waves-effect waves-green btn-flat previous-button");
+						previousButton.attr("data-pop-up-id", "#pop-up" +m);
+						previousButton.text("<< Previous Result");
+						var nextButton = $("<button>");
+						nextButton.addClass("waves-effect waves-green btn-flat next-button");
+						nextButton.attr("data-pop-up-id", "#pop-up" +m);
+						nextButton.text("Next Result >>");
+						popUpFooter.append(previousButton, nextButton);
+
+						popUpContent.append(firstRow, secondRow, thirdRow, popUpFooter);
+
+						popUpEvent.append(popUpContent);
+
+						var id = previousButton.attr("data-pop-up-id");
+						popUpIdArr.push(id);
+
+
+						$("#main-content").append(popUpEvent);
+
+						$("#pop-up" + m).hide();
+
 
 
 						totalEvents = json.page.totalElements;
@@ -445,14 +524,69 @@ $(document).ready(function(){
 
 						// console.log(moment(events[m].dates.start.localDate).format("dddd"));
 						console.log(moment(events[m].dates.start.localDate).format("ddd MM/DD/YY"));
-						console.log(moment(time, "HH:mm:ss"))
-						console.log(moment(convertedTime).format("h:mm A"))
-
-
-
-						
+						var time = events[m].dates.start.localTime;
+						console.log(moment.parseZone(time)._i);
+						console.log("time: " + time)
+						console.log(moment(time, "HH:mm a"));
+						console.log("IDs: " +popUpIdArr);
 
 					}
+
+					//Opens ticket purchase page in a new window
+					$(document).on("click", ".purchase-button", function() {
+						var purchaseUrl = $(this).attr("data-url");
+						window.open(purchaseUrl, "_blank");
+					})
+					//Opens pop-up by clicking on the search result
+					$(document).on("click", ".event", function() {
+						var popUpId = $(this).attr("data-pop-up-id");
+						$(".background-opacity").fadeIn("fast");
+						$(popUpId).fadeIn("fast");
+						console.log("POP UP WORKING");
+					})
+					//Closes the pop-up
+					$(document).on("click", ".close-button", function() {
+						$(".background-opacity").fadeOut("fast");
+						$(".pop-up-event").fadeOut("fast");
+
+					})
+
+					$(document).on("click", ".previous-button", function() {
+						var prevButtonId = $(this).attr("data-pop-up-id");
+						console.log(prevButtonId);
+						if(prevButtonId == popUpIdArr[0]) {
+							return;
+						}
+						else {
+							for(var index = 0; index < popUpIdArr.length; index++) {
+								if(prevButtonId == popUpIdArr[index]) {
+									$(prevButtonId).hide();
+									$(popUpIdArr[index - 1]).show();
+								}
+							}
+						}
+					})
+
+					$(document).on("click", ".next-button", function() {
+						var nextButtonId = $(this).attr("data-pop-up-id");
+						console.log(nextButtonId);
+						if(nextButtonId == popUpIdArr[popUpIdArr.length - 1]) {
+							console.log("I can't go any farther");
+							return;
+						}
+						else {
+							console.log("starting for loop");
+							console.log(popUpIdArr);
+							for(var index = 0; index < popUpIdArr.length; index++) {
+								if(nextButtonId == popUpIdArr[index]) {
+									console.log("on to the next pop up");
+									$(nextButtonId).hide();
+									$(popUpIdArr[index + 1]).show();					
+								}
+							}
+						}
+					})
+
 
 					// to prevent additional pagination each time
 					$(".pagination").empty();
@@ -472,8 +606,7 @@ $(document).ready(function(){
 
 
 						for (var q = 0; q < numPages; q++) {
-							// var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
-							var pageList = $("<li class='waves-effect'><a href='#!'>" + parseInt(q+1) + "</a></li>");
+							var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
 							pageList.attr("data-number", q);
 							if (q==currentPage){
 								pageList.addClass("active")
@@ -496,6 +629,7 @@ $(document).ready(function(){
 				console.log("queryUrl" + queryUrl);
 
 
+
           }, //close success
           error: function(xhr, status, err) {
               // This time, we do not end up here!
@@ -512,6 +646,8 @@ $(document).ready(function(){
 		setSearchParameters();
 
 		clearLocations();
+
+		$(".pop-up-event").remove();
 
 		//every time there is a new search, go to first page of results
 		currentPage = 0;
@@ -547,6 +683,8 @@ $(document).ready(function(){
 
 		console.log("currentPage " + currentPage)
 
+		$(".pop-up-event").remove();
+
 
 
 		// // console.log(($(this).val) + "this.val()")
@@ -554,14 +692,14 @@ $(document).ready(function(){
 
 		// remove active class from all page numbers 
 		//(this way we don't have to determine which page number was the last one clicked)
-		$(".waves-effect").removeClass("active");
+		$(".page-item").removeClass("active");
 		//add class "active" to the page numebr clicked
 		$(this).addClass("active");
 		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName + size + page;
 
 		//ajaxCall with the new page number in queryUrl
-  		ajaxCall();
-	
+		ajaxCall();
+
 	}); //page-button click
 
 
@@ -684,7 +822,8 @@ $(document).ready(function(){
 
   	 	
   	 function delayClick() {  // open menu modal if x,y coordinates are on icon
-  	 	click(mouseDownCordinates[0], mouseDownCordinates[1]);
+  	 	console.log("30 seconds");
+  	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
   	 }
 
 
@@ -708,8 +847,7 @@ $(document).ready(function(){
 		el.dispatchEvent(ev);
 	}
 
-
-	// force focus when modal is open and click on input field
+		// force focus when modal is open and click on input field
 	$("#keyword-input").on("click", function() {
 		$(this).focus(); 
 	});
@@ -717,4 +855,3 @@ $(document).ready(function(){
 
 
 }); //document.ready
-
