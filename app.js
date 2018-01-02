@@ -24,6 +24,8 @@ function initGoogleMap() {
 
 $(document).ready(function(){
 
+	$(".error-pop-up-row").hide();
+
 	$(".background-opacity").hide();
 
 	var string = "1.6525625";
@@ -70,6 +72,12 @@ $(document).ready(function(){
 	setSearchParametersFromLocalStorage();
 
 	console.log("numperpage" + numPerPage)
+
+	function errorCall(errorMessage) {
+		$(".error-pop-up-row").fadeIn("fast");
+		$(".error-content").html(errorMessage);
+		$("#map").hide();
+	}
 
 
 	function setSearchParameters() {
@@ -351,6 +359,7 @@ $(document).ready(function(){
 
 		clearEvents();
 		clearLocations();
+		$("#map").show();
 
 		$.ajax({
 			type:"GET",
@@ -361,7 +370,10 @@ $(document).ready(function(){
 				console.log(json);
 
 				if(json.page.totalElements === 0) {
-					alert("Sorry! There are no events in your area!");
+					var msg = "<h5>Sorry!...We couldn't find any events that match what you're looking for.</h5><br><h5>Please try another search.</h5>";
+
+					errorCall(msg);
+					
 					console.log("events " + events);
 				}
 
@@ -701,6 +713,10 @@ $(document).ready(function(){
 		ajaxCall();
 
 	}); //page-button click
+
+	$(document).on("click", ".close-error", function() {
+		$(".error-pop-up-row").fadeOut("fast");
+	});
 
 
 	// Search  - modal popups

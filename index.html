@@ -1,113 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Gig Compass</title>
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!--Import Google Icon Font-->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Prompt|Satisfy" rel="stylesheet">
-	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link rel="stylesheet" type="text/css" href="style.css">
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!--Import materialize.js, must go after jquery-->
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVE0YZTBYmeFwStCIUt8mMgyfL7tLYYhU&callback=initGoogleMap"></script>
-	<script type="text/javascript" src="app.js"></script>
-	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-</head>
-<body>
-	<div class="container-fluid background-opacity">
-	</div>
-	<div id="header">
-		<nav>
-			<div class="nav-wrapper blue-container" id="nav-bar">
-				<a href="#!" class="brand-logo" id="title">GigCompass<i class="material-icons right" id="compass">explore</i></a>
-				<ul class="right hide-on-med-and-down" id="search-bar">
-					<li> <input id="keyword-input" type="search" value="" placeholder="What are you looking for?"></li>
-					<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
-					<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
-					<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
-					<li id="submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
+	<head>
+		<meta charset="UTF-8">
+		<title>Gig Compass</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Prompt|Satisfy" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!--Import materialize.js, must go after jquery-->
+		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVE0YZTBYmeFwStCIUt8mMgyfL7tLYYhU&callback=initGoogleMap"></script>
+		<script type="text/javascript" src="app.js"></script>
+		<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid background-opacity">
+		</div>
+		<div id="header">
+			<nav>
+				<div class="nav-wrapper blue-container" id="nav-bar">
+					<h1 class="brand-logo" id="title">GigCompass<i class="material-icons right" id="compass">explore</i></h1>
+					<ul class="right hide-on-med-and-down" id="search-bar">
+						<li> <input id="keyword-input" type="search" value="" placeholder="What are you looking for?"></li>
+						<li><a class="waves-effect waves-light model-action modal-trigger" href="#modal-categories">Categories<i class="material-icons right">view_module</i></a></li>
+						<li><a class="waves-effect waves-light modal-trigger" href="#modal-location">Location<i class="material-icons right">location_city</i></a></li>
+						<li><a class="waves-effect waves-light modal-trigger" href="#modal-daterange">Date Range<i class="material-icons right">date_range</i></a></li>
+						<li id="submit"><a href="collapsible.html"><i class="large material-icons">send</i></a></li>
+					</ul>
+				</div>
+			</nav>
+			<div class="row error-pop-up-row">
+				<div class="col-xs-8 col-xs-offset-2">
+					<div class="error-pop-up">
+						<button type="button" class="close-error">X</button>
+						<div class="error-content">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modal-categories" class="modal">
+				<ul class="collection">
+					<li value="100" class="collection-item categories" id="music"><i class="material-icons">music_note</i> Music</li>
+					<li value="200" class="collection-item categories" id="sports"><i class="material-icons">golf_course</i> Sports</li>
+					<li value="300" class="collection-item categories" id="family"><i class="material-icons">child_friendly</i> Family</li>
+					<li value="400" class="collection-item categories" id="arts"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
 				</ul>
 			</div>
-		</nav>
-		<div id="modal-categories" class="modal">
-			<ul class="collection">
-				<li value="100" class="collection-item categories" id="music"><i class="material-icons">music_note</i> Music</li>
-				<li value="200" class="collection-item categories" id="sports"><i class="material-icons">golf_course</i> Sports</li>
-				<li value="300" class="collection-item categories" id="family"><i class="material-icons">child_friendly</i> Family</li>
-				<li value="400" class="collection-item categories" id="arts"><i class="material-icons">tag_faces</i> Arts &amp; Theater</li>
-			</ul>
-		</div>
-
-		<div id="modal-location" class="modal">
-			<div class="row" id="form-location">
-				<form class="col s12" >
+			<div id="modal-location" class="modal">
+				<div class="row" id="form-location">
+					<form class="col s12" >
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="city-input" type="text" value="" placeholder="City">
+							</div>
+							<div class="input-field col s12">
+								<input id="state-input" type="text" value="" placeholder="State" autocomplete="new-password">
+							</div>
+							<div class="input-field col s6">
+								<input id="zip-input" type="text" value="" placeholder="Zip">
+							</div>
+							<div class="input-field col s6">
+								<label >Radius:</label>
+								<input id="radius-input" type="range" min="5" max="50" value="5" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="modal-daterange" class="modal">
+				<form id="form-datarange">
 					<div class="row">
-						<div class="input-field col s12">
-							<input id="city-input" type="text" value="" placeholder="City">
+						<div class="col s3">
+							<label class="label-daterange">From</label>
 						</div>
-						<div class="input-field col s12">
-							<input id="state-input" type="text" value="" placeholder="State" autocomplete="new-password">
+						<div class="col s8">
+							<input id="from-date-input" value="" type="date">
 						</div>
-						<div class="input-field col s6">
-							<input id="zip-input" type="text" value="" placeholder="Zip">
+					</div>
+					<div class="row">
+						<div class="col s3">
+							<label class="label-daterange">To</label>
 						</div>
-						<div class="input-field col s6">
-							<label >Radius:</label>
-							<input id="radius-input" type="range" min="5" max="50" value="5" />
+						<div class="col s8">
+							<input id="to-date-input" value="" type="date">
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-
-
-		<div id="modal-daterange" class="modal">
-			<form id="form-datarange">
-				<div class="row">
-					<div class="col s3">	
-						<label class="label-daterange">From</label>
-					</div>
-					<div class="col s8">	
-						<input id="from-date-input" value="" type="date">
-					</div>
+		
+		<!-- Pop-Up-Event Structure -->
+		<div class="container-fluid" id="main-content">
+			<div class="row" id="row">
+				<div class="col-md-6" id="event-list">
 				</div>
-				<div class="row">
-					<div class="col s3">	
-						<label class="label-daterange">To</label>
+				<div class="col-md-6" id="map-column">
+					<div id="map">
 					</div>
-					<div class="col s8">	
-						<input id="to-date-input" value="" type="date">
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	
-	<!-- Pop-Up-Event Structure -->
-	<div class="container-fluid" id="main-content">
-		<div class="row" id="row">
-			<div class="col-md-6" id="event-list">
-
-			</div>
-			<div class="col-md-6" id="map-column">
-				<div id="map">
 				</div>
 			</div>
 		</div>
-	</div>
-	<!--Pagination -->
-	<nav class="my-4 blue-container" id="page-buttons">
-		<ul class="pagination pagination-circle pg-blue mb-0">
-		</ul>
-	</nav>
-</body>
+		<!--Pagination -->
+		<nav class="my-4 blue-container" id="page-buttons">
+			<ul class="pagination pagination-circle pg-blue mb-0">
+			</ul>
+		</nav>
+	</body>
 </html>

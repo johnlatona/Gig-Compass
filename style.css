@@ -23,6 +23,20 @@ h6 {
   font-size: 1.5vw;
 }
 
+h3 {
+  font-size: 2.5vw;
+}
+
+hr {
+  background-color: black;
+  border: 1px solid #000000;
+}
+
+#title {
+  margin: 0;
+  padding: 0;
+}
+
 #main-content {
   padding: 0;
   margin: 0;
@@ -227,6 +241,19 @@ nav a:link{
 
 .next-button {
   float: right;
+  border-bottom-right-radius: 30px
+}
+
+.previous-button {
+  border-bottom-left-radius: 30px
+}
+
+.next-button:hover {
+  background-color: #C4C4C4;
+}
+
+.previous-button:hover {
+  background-color: #C4C4C4;
 }
 
 #pop-up-header {
@@ -327,4 +354,27 @@ nav a:link{
 	padding-left: 5px;
 	font-weight: bold;
 	font-size: 1rem;
+}
+
+.error-pop-up {
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 10vw;
+  margin-top: 10vw;
+  border: 1px solid #000000;
+  border-radius: 30px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  text-align: center;
+}
+
+.close-error {
+  font-size: 1.5vw;
+  float: right;
+  margin-right: 1vw;
+  border: 0;
+  margin-top: 1vw;
+}
+
+.close-error:hover {
+  background-color: #C4C4C4;
 }
