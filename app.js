@@ -85,6 +85,11 @@ $(document).ready(function(){
 		$("#map").hide();
 	}
 
+	function errorCallDate(errorMessage) {
+		$(".error-pop-up-row").fadeIn("fast");
+		$(".error-content").html(errorMessage);
+		$(".background-opacity").fadeIn("fast");
+	}
 
 	function setSearchParameters() {
 		// keyword
@@ -694,7 +699,7 @@ $(document).ready(function(){
 		setSearchParameters();
 
 		if (!isDateRangeValid()) {
-			errorCall("<h5>Please enter a valid date range</h5>");
+			errorCallDate("<h5>Please enter a valid date range</h5>");
 			return false;
 		}
 
@@ -760,6 +765,7 @@ $(document).ready(function(){
 
 	$(document).on("click", ".close-error", function() {
 		$(".error-pop-up-row").fadeOut("fast");
+		$(".background-opacity").fadeOut("fast");
 	});
 
 
