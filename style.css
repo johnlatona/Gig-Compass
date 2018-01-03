@@ -365,7 +365,6 @@ nav a:link{
 }
 
 .error-pop-up {
-  position: static;
   background-color: rgba(255, 255, 255, 0.95);
   height: 10vw;
   margin-top: 10vw;
@@ -374,7 +373,6 @@ nav a:link{
   padding-left: 1vw;
   padding-right: 1vw;
   text-align: center;
-  z-index: 1;
 }
 
 .close-error {
@@ -405,6 +403,12 @@ nav a:link{
 
 }
 
+@media only screen and (max-width: 910px) {
+	#nav-bar{
+		height:64px;
+	}
+}
+
 @media only screen and (max-width: 865px) {
  
  #titleText{
@@ -430,6 +434,12 @@ nav a:link{
   }
 }
 
+@media only screen and (max-width: 600px) {
+	#nav-bar{
+		height:56px;
+	}
+}
+
 @media only screen and (max-width: 650px) {
 	#keyword-input {
     width: 190px;
@@ -444,7 +454,7 @@ nav a:link{
 }
 
 
-@media only screen and (max-width: 565px) {
+@media only screen and (max-width: 580px) {
 	#keyword-input {
     width: 180px;
 
