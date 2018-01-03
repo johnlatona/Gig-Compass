@@ -149,9 +149,20 @@ select:invalid {
 	left: 60%;
 	border-radius:5px;
 	width: 16.5% !important ; 
-	height: 35% !important ;
+	height: 230px !important ;
 	font-weight: bold;
 	color: #757575;
+}
+
+#modal-location {
+	position:fixed;
+	margin:0px;
+	padding: 0px;
+	top: 7vw !important;
+	left: 70%;
+	border-radius:5px;
+	width: 17% !important ; 
+	height: 240px !important ;
 }
 
 #modal-daterange {
@@ -163,18 +174,7 @@ select:invalid {
 	left: 80%;
 	border-radius:5px;
 	width: 18% !important ; 
-	height: 30% !important ;
-}
-
-#modal-location {
-	position:fixed;
-	margin:0px;
-	padding: 0px;
-	top: 7vw !important;
-	left: 70%;
-	border-radius:5px;
-	width: 17% !important ; 
-	height: 37% !important ;
+	height: 180px !important ;
 }
 
 input[type='range']
@@ -437,7 +437,6 @@ nav a:link{
 		left: 60%;
 		top:64px !important;
 		width: 26% !important ; 
-		height: 45% !important;
 	}
 
 	#modal-daterange {
@@ -445,14 +444,12 @@ nav a:link{
 		top:64px !important;
 		width: 28% !important; 
 		padding: 5px 0px 0px 0px;
-		height: 34% !important;
 	}
 
 	#modal-location {
 		left: 68%;
 		top:64px !important;
 		width: 25% !important ;
-		height: 47% !important;
 	}
 
 	#zip-input,
@@ -549,7 +546,7 @@ nav a:link{
   	#modal-categories {
   		left: 60%;
   		width: 30% !important ; 
-  		height: 40% !important;
+  		height: 140px !important;
   		font-size:10px;
   	}
 
@@ -560,14 +557,14 @@ nav a:link{
 		#modal-location {
   		left: 60%;
   		width: 35% !important ;
-  		height: 47% !important;
+  		height: 220px !important;
   	}
 
   	#modal-daterange {
-  		left: 60%;
-  		width: 40% !important; 
+  		left: 50%;
+  		width: 50% !important; 
   		padding: 5px 0px 0px 0px;
-  		height: 34% !important;
+  		height: 140px !important;
   		font-size:10px;
   	}
 
