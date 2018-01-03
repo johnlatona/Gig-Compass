@@ -75,6 +75,10 @@ $(document).ready(function(){
 
 	console.log("numperpage" + numPerPage)
 
+	
+
+	// Functions
+
 	function errorCall(errorMessage) {
 		$(".error-pop-up-row").fadeIn("fast");
 		$(".error-content").html(errorMessage);
@@ -653,6 +657,36 @@ $(document).ready(function(){
 	} //close function definition
 
 
+	 function delayClick() {  // open menu modal if x,y coordinates are on icon
+  	 	console.log("30 seconds");
+  	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
+  	 }
+
+
+  	 function click(x,y){  // simulate  click
+		var ev = document.createEvent("MouseEvent");
+		var el = document.elementFromPoint(x,y);
+		ev.initMouseEvent(
+			"click",
+			true /* bubble */, true /* cancelable */,
+			window, null,
+			x, y, x, y, /* coordinates */
+			false, false, false, false, /* modifier keys */
+			0 /*left*/, null
+		);
+		el.dispatchEvent(ev);
+	}
+
+	function isDateRangeValid() {
+		if (searchObj.toDateDisplay < searchObj.fromDateDisplay) {
+			console.log("Please enter valid date range");
+			return false;
+		}
+		return true;
+	}
+
+
+	// Events
 
 	$("#submit").on("click", function(event) {
 		event.preventDefault();
@@ -846,45 +880,16 @@ $(document).ready(function(){
   		});
 	}); 
 
-  	 	
-  	 function delayClick() {  // open menu modal if x,y coordinates are on icon
-  	 	console.log("30 seconds");
-  	 	click(mouseDownCordinates[0], mouseDownCordinates[1])
-  	 }
-
 
   	$('body').mousedown(function(e) {  // keepp track of mouse down coordinates to open menu modal
 		mouseDownCordinates[0] = e.clientX;
 		mouseDownCordinates[1] = e.clientY;
 	});
 
-
-	function click(x,y){  // simulate  click
-		var ev = document.createEvent("MouseEvent");
-		var el = document.elementFromPoint(x,y);
-		ev.initMouseEvent(
-			"click",
-			true /* bubble */, true /* cancelable */,
-			window, null,
-			x, y, x, y, /* coordinates */
-			false, false, false, false, /* modifier keys */
-			0 /*left*/, null
-		);
-		el.dispatchEvent(ev);
-	}
-
 		// force focus when modal is open and click on input field
 	$("#keyword-input").on("click", function() {
 		$(this).focus(); 
 	});
-
-	function isDateRangeValid() {
-		if (searchObj.toDateDisplay < searchObj.fromDateDisplay) {
-			console.log("Please enter valid date range");
-			return false;
-		}
-		return true;
-	}
 
 
 
