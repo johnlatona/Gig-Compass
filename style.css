@@ -93,10 +93,10 @@ nav{
 
 #title {
   font-size: 3vw;
-  /*padding: 0;*/
   padding-left: 2vw;
   font-style: italic;
-  margin: 0;  
+  margin: 0;
+  /*padding: 0;*/
 }
 
 .par-display{
@@ -365,6 +365,7 @@ nav a:link{
 }
 
 .error-pop-up {
+	position: static;
   background-color: rgba(255, 255, 255, 0.95);
   height: 10vw;
   margin-top: 10vw;
@@ -373,6 +374,7 @@ nav a:link{
   padding-left: 1vw;
   padding-right: 1vw;
   text-align: center;
+  z-index: 1;
 }
 
 .close-error {
@@ -389,48 +391,42 @@ nav a:link{
 
 
 @media only screen and (max-width: 1070px) {
-  #keyword-input {
-	  width: 220px;
-	  margin-bottom: 0;
-	  position: relative;
-	  bottom:10px;
-  }
+    #keyword-input {
+        width: 220px;
+        margin-bottom: 0;
+        position: relative;
+        bottom:10px;
+    }
 
-  #titleText{
+    #titleText{
 		position:relative;
   	top:5px;
 	}
 
 }
-
 @media only screen and (max-width: 910px) {
 	#nav-bar{
 		height:64px;
 	}
 }
 
-@media only screen and (max-width: 865px) {
- 
- #titleText{
-		position:relative;
-  	top:7px;
-	}
-}
-
 
 @media only screen and (max-width: 730px) {
-  #titleText{
+    #keyword-input {
+/*        width: 190px;
+*/       
+
+    }
+
+    #titleText{
 		position:relative;
-		top:10px;
+  	top:10px;
 	}
 
-  #keyword-input {
-    width: 190px;
-  }
 
   .navIcons{
   	padding-left:0;
-  	padding-right:5px;
+  	/*padding-right:5px;*/
   }
 }
 
@@ -440,11 +436,12 @@ nav a:link{
 	}
 }
 
+
 @media only screen and (max-width: 650px) {
 	#keyword-input {
-    width: 190px;
+        width: 190px;
 
-  }
+    }
 
   .navIcons{
   	padding-left:0;
@@ -454,13 +451,15 @@ nav a:link{
 }
 
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 565px) {
 	#keyword-input {
-    width: 180px;
+        width: 180px;
 
-  }
+    }
 
 	.sendIcon{
 		padding-right:5px ;
 	}
+  
+
 }
