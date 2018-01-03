@@ -145,7 +145,7 @@ select:invalid {
 	position:fixed;
 	margin:0px;
 	padding: 10px;
-	top: 64px !important;
+	top: 7vw !important;
 	left: 60%;
 	border-radius:5px;
 	width: 16.5% !important ; 
@@ -159,7 +159,7 @@ select:invalid {
 	margin:0px;
 	padding: 5px;
 	padding-top: 20px;
-	top: 64px !important;
+	top: 7vw !important;
 	left: 80%;
 	border-radius:5px;
 	width: 18% !important ; 
@@ -170,7 +170,7 @@ select:invalid {
 	position:fixed;
 	margin:0px;
 	padding: 0px;
-	top: 64px !important;
+	top: 7vw !important;
 	left: 70%;
 	border-radius:5px;
 	width: 17% !important ; 
@@ -435,12 +435,14 @@ nav a:link{
 
 	#modal-categories {
 		left: 60%;
+		top:64px !important;
 		width: 26% !important ; 
 		height: 45% !important;
 	}
 
 	#modal-daterange {
 		left: 70%;
+		top:64px !important;
 		width: 28% !important; 
 		padding: 5px 0px 0px 0px;
 		height: 34% !important;
@@ -448,6 +450,7 @@ nav a:link{
 
 	#modal-location {
 		left: 68%;
+		top:64px !important;
 		width: 25% !important ;
 		height: 47% !important;
 	}
@@ -493,6 +496,14 @@ nav a:link{
 	#nav-bar{
 		height:56px;
 	}
+
+	#modal-categories,
+	#modal-location,
+	#modal-daterange{
+		top: 56px !important;
+	}
+
+
 }
 
 
@@ -525,112 +536,97 @@ nav a:link{
 @media only screen and (max-width: 425px) {
 
 	#titleText {
-		font-size: 20px;
-		top: 10px;
+		
+		top: 13px;
 	}
 
-
-	.material-icons {
-		font-size: 18px !important;
-	}
-
-	.right,
-	.sendIcon,
 	#keyword-input{
-		margin: 0px 2px !important;
-		padding: 0 !important;
+  			font-size: 10px;
+  			width: 60px;
 
-	}
-
-
-  	/*#keyword-input {
-  		width: 200px;
-  		margin-bottom: 0;
-  		position: relative;
-  		bottom:10px;
-  	}
-
+  		}
 
   	#modal-categories {
   		left: 60%;
-  		width: 26% !important ; 
-  		height: 45% !important;
+  		width: 30% !important ; 
+  		height: 40% !important;
+  		font-size:10px;
+  	}
+
+  	.collection-item{
+  		padding:2px 5px !important;
+  	}
+
+		#modal-location {
+  		left: 60%;
+  		width: 35% !important ;
+  		height: 47% !important;
   	}
 
   	#modal-daterange {
-  		left: 70%;
-  		width: 28% !important; 
+  		left: 60%;
+  		width: 40% !important; 
   		padding: 5px 0px 0px 0px;
   		height: 34% !important;
+  		font-size:10px;
   	}
 
-  	#modal-location {
-  		left: 68%;
-  		width: 25% !important ;
-  		height: 47% !important;
+  	#from-date-input,
+  	#to-date-input{
+  		font-size:12px;
+  	}
+
+  	
+
+  	#city-input,
+  	#state-input{
+  		font-size:12px;
+  		margin:0;
   	}
 
   	#zip-input,
   	#radius-input{
   		width: 50px;
-  		}*/
-
+  		font-size:12px;
   	}
+
+  	#radius-label{
+  		font-size:12px;
+  	}
+
+  }
 
 
 
   	@media only screen and (max-width: 375px) {
 
-  		#titleText {
-  			font-size: 20px;
-  			top: 10px;
-  		}
+  	
 
 
-  		.material-icons {
-  			font-size: 18px !important;
-  		}
+  		 		
+  		
 
-  		.right,
-  		.sendIcon,
-  		#keyword-input{
-  			margin: 0px 2px !important;
-  			padding: 0 !important;
-
-  		}
-
-
-  	/*#keyword-input {
-  		width: 200px;
-  		margin-bottom: 0;
-  		position: relative;
-  		bottom:10px;
-  	}
-
-
+		
   	#modal-categories {
-  		left: 60%;
-  		width: 26% !important ; 
-  		height: 45% !important;
-  	}
-
-  	#modal-daterange {
-  		left: 70%;
-  		width: 28% !important; 
-  		padding: 5px 0px 0px 0px;
-  		height: 34% !important;
+  		left: 55%;
+  		width: 35% !important; 
+  	
   	}
 
   	#modal-location {
-  		left: 68%;
-  		width: 25% !important ;
-  		height: 47% !important;
+  		left: 55%;
+  		width: 40% !important ;
+  		
+  	}
+  	
+
+  	#modal-daterange {
+  		left: 52%;
+  		width: 47% !important; 
+  	
   	}
 
-  	#zip-input,
-  	#radius-input{
-  		width: 50px;
-  		}*/
+  	
 
   	}
 
@@ -639,56 +635,24 @@ nav a:link{
 
   	@media only screen and (max-width: 320px) {
 
-  		#titleText {
-  			font-size: 20px;
-  			top: 10px;
-  		}
-
-
-  		.material-icons {
-  			font-size: 18px !important;
-  		}
-
-  		.right,
-  		.sendIcon,
-  		#keyword-input{
-  			margin: 0px 2px !important;
-  			padding: 0 !important;
-
-  		}
-
-
-  	/*#keyword-input {
-  		width: 200px;
-  		margin-bottom: 0;
-  		position: relative;
-  		bottom:10px;
-  	}
-
-
-  	#modal-categories {
-  		left: 60%;
-  		width: 26% !important ; 
-  		height: 45% !important;
-  	}
-
-  	#modal-daterange {
-  		left: 70%;
-  		width: 28% !important; 
-  		padding: 5px 0px 0px 0px;
-  		height: 34% !important;
+  		#modal-categories {
+  		left: 50%;
+  		width: 40% !important; 
+  	
   	}
 
   	#modal-location {
-  		left: 68%;
-  		width: 25% !important ;
-  		height: 47% !important;
+  		left: 50%;
+  		width: 47% !important ;
+  		
+  	}
+  	
+
+  	#modal-daterange {
+  		left: 45%;
+  		width: 54% !important; 
+  	
   	}
 
-  	#zip-input,
-  	#radius-input{
-  		width: 50px;
-  		}*/
-
-  	}
+}
 
