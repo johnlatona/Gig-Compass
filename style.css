@@ -178,7 +178,7 @@ select:invalid {
 	left: 80%;
 	border-radius:5px;
 	width: 18% !important ; 
-	height: 180px !important ;
+	height: 200px !important ;
 }
 
 input[type='range']
