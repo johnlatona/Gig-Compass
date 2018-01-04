@@ -20,7 +20,7 @@ body {
 }
 
 h6 {
-	font-size: 1.5vw;
+	font-size: 1.3vw;
 }
 
 h5 {
@@ -58,6 +58,10 @@ hr {
 	padding: 0;
 	margin-top: 4.4%;
 	z-index: 0;
+}
+
+#event-map {
+	height: 10vw;
 }
 
 #row {
@@ -104,7 +108,7 @@ nav{
 }
 .image-display{
 	/*clear:both;*/
-	height:100px;
+	height:150px;
 }
 
 
@@ -235,11 +239,12 @@ nav a:link{
 
 .pop-up-event {
 	position: fixed;
-	top: 6vw;
+	width: 50%;
+	top: 13.6vh;
+	bottom: 8.8vh;
 	z-index: 10;
 	border: 1px solid #000000;
-	border-radius: 30px;
-	background-color: rgba(255, 255, 255, 0.95);
+	background-color: rgb(255, 255, 255);
 	padding: 0;
 }
 
@@ -249,36 +254,30 @@ nav a:link{
 
 .next-button {
 	float: right;
-	border-bottom-right-radius: 30px
+	margin-bottom: 5px;
 }
 
 .previous-button {
-	border-bottom-left-radius: 30px
-}
-
-.next-button:hover {
-	background-color: #C4C4C4;
-}
-
-.previous-button:hover {
-	background-color: #C4C4C4;
+	margin-bottom: 5px;
 }
 
 #pop-up-header {
 	background-color: rgba(219, 219, 219, 0.95);
 	width: 100% !important;
 	border: 1px solid #DBDBDB;
-	border-top-left-radius: 30px;
-	border-top-right-radius: 30px;
 	border-bottom: outset;
 }
 
 .pop-up-img {
-	width: 30vw;
+	width: 25vw;
 }
 
 .row-three {
 	text-align: center;
+}
+
+.pop-up-footer {
+	padding: 0;
 }
 .purchase-button {
 	width: 100%;
@@ -304,7 +303,7 @@ nav a:link{
 	margin-top: 2vw;
 	height: 3vw;
 	text-align: center;
-	padding-left: 1vw
+	padding-left: 1vw;
 }
 
 .close-button:hover {
@@ -398,6 +397,41 @@ nav a:link{
 	background-color: #C4C4C4;
 }
 
+.image-display {
+	width: 13vw;
+}
+
+@media only screen and (max-width: 1300px) {
+
+	.pop-up-event {
+		width: 50%;
+		top: 12.8vh;
+		bottom: 9.2vh;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.pop-up-event {
+		width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+		height: 70vh;
+		border-radius: 30px;
+	}
+
+	#pop-up-header {
+		border-top-left-radius: 30px;
+		border-top-right-radius: 30px
+	}
+
+	h5 {
+		font-size: 2.7vw;
+	}
+
+	h6 {
+		font-size: 2.3vw;
+	}
+}
 
 @media only screen and (max-width: 1024px) {
 	#keyword-input {
@@ -431,12 +465,28 @@ nav a:link{
 		width: 20% !important ;
 	}
 
+	.image-display {
+		width: 170px;
+	}
+
 }
 
 
 @media only screen and (max-width: 910px) {
 	#nav-bar{
 		height:64px;
+	}
+
+	.pop-up-img {
+		width: 35vw;
+	}
+
+	.close-button {
+		height: 4vw;
+	}
+
+	.close-button:hover {
+		background-color: none;
 	}
 }
 
@@ -471,6 +521,19 @@ nav a:link{
 		top: 10px;
 	}
 
+	.pop-up-img {
+		width: 44vw;
+	}
+
+	p {
+		font-size: 2vw;
+	}
+
+	.close-button {
+		height: 4.5vw;
+		padding-left: 2vw
+	}
+
 }
 
 
@@ -493,6 +556,10 @@ nav a:link{
 	#compass {
 		bottom: 32px;
 		left: 15px;
+	}
+
+	.pop-up-img {
+		width: 50vw;
 	}
 
 
@@ -534,8 +601,13 @@ nav a:link{
 
 	}
 
+	.next-button, .previous-button {
+		font-size: 2vw;
+	}
 
 }
+
+
 
 
 
@@ -600,14 +672,50 @@ nav a:link{
   		font-size:12px;
   	}
 
+  	.image-display {
+  		width: 80px;
+  		height: 80px;
+  	}
+
+  	.pop-up-img {
+  		width: 200px;
+  	}
+
+  	p {
+		font-size: 1.2vw;
+	}
+
+	h5 {
+		font-size: 3vw;
+	}
+
+	h6 {
+		font-size: 2vw;
+	}
+
+	.image-display {
+  		width: 110px;
+  	}
+
+  	.purchase-button {
+  		height: 60px;
+  		font-size: 20px;
+  	}
+
+  	.previous-button {
+  		font-size: 10px;
+  	}
+
+  	.next-button {
+  		font-size: 10px;
+  	}
+
+
   }
 
 
 
   	@media only screen and (max-width: 375px) {
-
-  	
-
 
   		 		
   		
@@ -641,7 +749,7 @@ nav a:link{
 
   	@media only screen and (max-width: 320px) {
 
-  		#modal-categories {
+  	#modal-categories {
   		left: 50%;
   		width: 40% !important; 
   	
@@ -658,6 +766,33 @@ nav a:link{
   		left: 45%;
   		width: 54% !important; 
   	
+  	}
+
+  	.event {
+  		padding: 0;
+  		margin: 0;
+  	}
+
+  	.image-display {
+  		width: 90px;
+  	}
+
+  	.pop-up-img {
+  		width: 150px;
+  	}
+
+  	.purchase-button {
+  		font-size: 15px;
+  		height: 40px;
+  	} 
+
+  	.previous-button, .next-button {
+  		font-size: 8px;
+  	}
+
+  	.event {
+  		margin-bottom: 10px;
+  		padding: 5px;
   	}
 
 }

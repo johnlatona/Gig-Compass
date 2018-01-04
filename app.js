@@ -1,6 +1,12 @@
 var locations =[];
 
+var uniqueLocations = [];
+
+var venueNames = [];
+
 var marker;
+
+var infoWindow;
 
 function initGoogleMap() {
 	console.log(locations);
@@ -10,11 +16,24 @@ function initGoogleMap() {
 	})
 
 	for (var k = 0; k < locations.length; k++) {
+		infoWindow = new google.maps.InfoWindow();
 		marker = new google.maps.Marker({
 			position: {lat: locations[k].lat, lng: locations[k].lng},
 			map: map,
+			animation: google.maps.Animation.DROP,
 			url: locations[k].url
 		});
+
+		google.maps.event.addListener(marker, 'click', (function(marker, k) {
+			return  function () {
+				infoWindow.setContent(locations[k].name);
+				infoWindow.open(map, marker);
+			}
+		})(marker, k));
+
+		infoWindow.setContent(locations[k].name);
+		infoWindow.open(map, marker);
+		
 		marker.addListener('click', function() {
 			window.open(this.url, "_blank");
 		});                        
@@ -27,12 +46,6 @@ $(document).ready(function(){
 	$(".error-pop-up-row").hide();
 
 	$(".background-opacity").hide();
-
-	var string = "1.6525625";
-	var number = parseFloat(string);
-
-	console.log(string);
-	console.log(number);
 
 	var events;
 
@@ -378,7 +391,10 @@ $(document).ready(function(){
 			async:true,
 			dataType: "json",
 			success: function(json) {
+				console.log("RESPONSE");
+				console.log("-----------------------");
 				console.log(json);
+				console.log("-----------------------");
 
 				if(json.page.totalElements === 0) {
 					var msg = "<h5>Sorry!...We couldn't find any events that match what you're looking for.</h5><br><h5>Please try another search.</h5>";
@@ -399,9 +415,14 @@ $(document).ready(function(){
 							}
 							else {
 
-								var latLong = {lat: parseFloat(venues[j].location.latitude), lng: parseFloat(venues[j].location.longitude), url: "https://www.google.com/maps/dir/?api=1&map_action=map&destination=" + venues[j].location.latitude + "%2C+" + venues[j].location.longitude};
-								console.log(latLong);
-								locations.push(latLong);
+								var venueMapInfo = {
+									lat: parseFloat(venues[j].location.latitude), 
+									lng: parseFloat(venues[j].location.longitude), 
+									url: "https://www.google.com/maps/dir/?api=1&map_action=map&destination=" + venues[j].location.latitude + "%2C+" + venues[j].location.longitude,
+									name: venues[0].name
+								};
+								console.log(venueMapInfo);
+								locations.push(venueMapInfo);
 							}
 						}
 					}
@@ -422,14 +443,24 @@ $(document).ready(function(){
 
 						var eventDisplay = $("<div>").addClass("event");
 
-						eventDisplay.attr("data-pop-up-id", "#pop-up" + m)
+						eventDisplay.attr("data-pop-up-id", "#pop-up" + m);
+						eventDisplay.attr("data-latitude", locations[m].lat);
+						eventDisplay.attr("data-longitude", locations[m].lng);
+						eventDisplay.attr("data-location-url", locations[m].url);
+						eventDisplay.attr("data-venue-name", locations[m].name);
+						var thisLat = eventDisplay.attr("data-latitude");
+						var thisLong = eventDisplay.attr("data-longitude");
+						var thisUrl = eventDisplay.attr("data-location-url");
+						var thisVenue = eventDisplay.attr("data-venue-name");
+						uniqueLocations.push({lat: parseFloat(thisLat), lng: parseFloat(thisLong), url: thisUrl, name: thisVenue});
+						console.log(uniqueLocations);
 
 						var eventRow = $("<div>");
 						eventRow.addClass("row");
 
 						eventColOne = $("<div>").addClass("col-xs-4");
 
-						var eventPic = $("<img src=" + events[m].images[2].url + " alt=" + events[m].name + ">");
+						var eventPic = $("<img src=" + events[m].images[0].url + " alt=" + events[m].name + ">");
 						eventPic.addClass("image-display");
 
 						eventColOne.append(eventPic);
@@ -469,7 +500,7 @@ $(document).ready(function(){
 
 						var popUpEvent = $("<div>");
 						//Adds class="pop-up-event" to each new pop up div
-						popUpEvent.addClass("col-md-10 col-md-offset-1 pop-up-event");
+						popUpEvent.addClass("col-md-6 pop-up-event");
 						//Adds a pop up number id corresponding to each index number of the events array.
 						popUpEvent.attr("id", "pop-up" + m);
 						//Creates a new content div for each pop up
@@ -497,12 +528,12 @@ $(document).ready(function(){
 						var secondRow = $("<div>");
 						secondRow.addClass("row");
 						var secondRowColOne = $("<div>");
-						secondRowColOne.addClass("col-xs-5");
+						secondRowColOne.addClass("col-xs-7");
 						var popUpImg = $('<img src="' + events[m].images[2].url + '" alt="' + events[m].name + '" class="pop-up-img">');
 						secondRowColOne.append(popUpImg);
 						var secondRowColTwo = $("<div>");
-						secondRowColTwo.addClass("col-xs-7");
-						secondRowColTwo.html('<h4>' + events[m]._embedded.venues[0].name + "</h4><br><h6>Address:</h6><br><p>" + events[m]._embedded.venues[0].address.line1 + "</p><p>" + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + " " +
+						secondRowColTwo.addClass("col-xs-5");
+						secondRowColTwo.html('<h5>' + events[m]._embedded.venues[0].name + "</h5><br><h6>Address:</h6><p>" + events[m]._embedded.venues[0].address.line1 + "</p><p>" + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + " " +
 						events[m]._embedded.venues[0].postalCode + "</p>");
 						secondRow.append(secondRowColOne, secondRowColTwo);
 						//third row content pop up: purchase tickets button
@@ -512,16 +543,18 @@ $(document).ready(function(){
 						thirdRowColOne.addClass("col-xs-12");
 						var purchaseButton = $("<button>");
 						purchaseButton.addClass("purchase-button");
-						purchaseButton.attr("data-url", events[m].url);
+						purchaseButton.attr("data-purchase-url", events[m].url);
 						purchaseButton.text("Purchase Tickets");
 						thirdRow.append(purchaseButton);
 						//Pop up Footer: Next and Previous buttons to cycle through event pop ups.
 						var popUpFooter = $("<div>");
 						popUpFooter.addClass("pop-up-footer");
+
 						var previousButton = $("<button>");
 						previousButton.addClass("waves-effect waves-green btn-flat previous-button");
 						previousButton.attr("data-pop-up-id", "#pop-up" +m);
 						previousButton.text("<< Previous Result");
+
 						var nextButton = $("<button>");
 						nextButton.addClass("waves-effect waves-green btn-flat next-button");
 						nextButton.attr("data-pop-up-id", "#pop-up" +m);
@@ -557,20 +590,54 @@ $(document).ready(function(){
 
 					//Opens ticket purchase page in a new window
 					$(document).on("click", ".purchase-button", function() {
-						var purchaseUrl = $(this).attr("data-url");
+						var purchaseUrl = $(this).attr("data-purchase-url");
 						window.open(purchaseUrl, "_blank");
 					})
 					//Opens pop-up by clicking on the search result
 					$(document).on("click", ".event", function() {
 						var popUpId = $(this).attr("data-pop-up-id");
-						$(".background-opacity").fadeIn("fast");
 						$(popUpId).fadeIn("fast");
 						console.log("POP UP WORKING");
+
+						var mapLat = $(this).attr("data-latitude");
+						var mapLong = $(this).attr("data-longitude");
+						var locationUrl = $(this).attr("data-location-url");
+						var locationName = $(this).attr("data-venue-name");
+
+						var newLocation = [{lat: parseFloat(mapLat), lng: parseFloat(mapLong), url: locationUrl, name: locationName}];
+
+						console.log(locations);
+						map = new google.maps.Map(document.getElementById("map"), {
+							zoom: 18,
+							center: {lat: newLocation[0].lat, lng: newLocation[0].lng}
+						})
+						infoWindow = new google.maps.InfoWindow();
+						marker = new google.maps.Marker({
+							position: {lat: newLocation[0].lat, lng: newLocation[0].lng},
+							map: map,
+							animation: google.maps.Animation.DROP,
+							url: newLocation[0].url
+						});
+
+						google.maps.event.addListener(marker, 'click', (function(marker) {
+							return  function () {
+								infoWindow.setContent(newLocation[0].name);
+								infoWindow.open(map, marker);
+							}
+						})(marker));
+
+						infoWindow.setContent(newLocation[0].name);
+						infoWindow.open(map, marker);
+		
+						marker.addListener('click', function() {
+							window.open(this.url, "_blank");
+						});                        
 					})
 					//Closes the pop-up
 					$(document).on("click", ".close-button", function() {
 						$(".background-opacity").fadeOut("fast");
 						$(".pop-up-event").fadeOut("fast");
+						initGoogleMap();
 
 					})
 
@@ -585,6 +652,25 @@ $(document).ready(function(){
 								if(prevButtonId == popUpIdArr[index]) {
 									$(prevButtonId).hide();
 									$(popUpIdArr[index - 1]).show();
+
+									map = new google.maps.Map(document.getElementById("map"), {
+										zoom: 18,
+										center: {lat: uniqueLocations[index - 1].lat, lng: uniqueLocations[index - 1].lng}
+									})
+									infoWindow = new google.maps.InfoWindow();
+									marker = new google.maps.Marker({
+										position: {lat: uniqueLocations[index - 1].lat, lng: uniqueLocations[index - 1].lng},
+										map: map,
+										animation: google.maps.Animation.DROP,
+										url: uniqueLocations[index - 1].url
+									});
+
+									infoWindow.setContent(uniqueLocations[index - 1].name);
+									infoWindow.open(map, marker);
+		
+									marker.addListener('click', function() {
+										window.open(this.url, "_blank");
+									});  
 								}
 							}
 						}
@@ -604,7 +690,28 @@ $(document).ready(function(){
 								if(nextButtonId == popUpIdArr[index]) {
 									console.log("on to the next pop up");
 									$(nextButtonId).hide();
-									$(popUpIdArr[index + 1]).show();					
+									$(popUpIdArr[index + 1]).show();
+
+									map = new google.maps.Map(document.getElementById("map"), {
+										zoom: 18,
+										center: {lat: uniqueLocations[index + 1].lat, lng: uniqueLocations[index + 1].lng}
+									})
+									infoWindow = new google.maps.InfoWindow();
+									marker = new google.maps.Marker({
+										position: {lat: uniqueLocations[index + 1].lat, lng: uniqueLocations[index + 1].lng},
+										map: map,
+										animation: google.maps.Animation.DROP,
+										url: uniqueLocations[index + 1].url
+									});
+
+									infoWindow.setContent(uniqueLocations[index + 1].name);
+									infoWindow.open(map, marker);
+		
+									marker.addListener('click', function() {
+										window.open(this.url, "_blank");
+									});  
+
+
 								}
 							}
 						}
