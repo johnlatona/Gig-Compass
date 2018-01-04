@@ -63,6 +63,7 @@ $(document).ready(function(){
 
 	var queryUrl;
 
+	var numPages = 10;
 	var numPerPage = 10;
 	var totalEvents;
 	var currentPage = 0;
@@ -722,19 +723,16 @@ $(document).ready(function(){
 					$(".pagination").empty();
 
 					console.log(totalEvents + " Total Events")
+					// create pagination only if there are enough events for more than 1 page
 					if (totalEvents > numPerPage){
-						var numPages;
-						if (totalEvents < numPerPage*10){
+
+						// make fewer pages if necessary
+						if (totalEvents < numPerPage * numPages){
 							numPages = Math.ceil(totalEvents/numPerPage)
 							console.log(numPages + " numPages");
 						}
 
-						else{
-							numPages = 10;
-							console.log(numPages + " numPages");
-						}
-
-
+						//page numbers
 						for (var q = 0; q < numPages; q++) {
 							var pageList = $("<li class='page-item'><a class='page-link'>" + parseInt(q+1) + "</a></li>");
 							pageList.attr("data-number", q);
@@ -746,6 +744,18 @@ $(document).ready(function(){
 							$(".pagination").append(pageList)
 
 						}
+
+						//left and right page arrows
+						pageList = $("<li class='page-item'><a class='page-link' aria-label='Previous'><span aria-hidden='true'>&laquo;</span><span class='sr-only'>Previous</span></a></li>");
+						pageList.attr("id", "prev-page");
+						$(".pagination").prepend(pageList);
+
+						pageList = $("<li class='page-item'><a class='page-link' aria-label='Next'><span aria-hidden='true'>&raquo;</span><span class='sr-only'>Next</span></a></li>");
+						pageList.attr("id", "next-page");
+						$(".pagination").append(pageList);
+
+
+
 
     			} // close if totalEvents > numPerPage (pagination)
 
@@ -847,13 +857,43 @@ $(document).ready(function(){
 
 
 	$("#page-buttons").on("click", "li", function() {
-		currentPage = $(this).attr("data-number");
+
+    if ($(this).attr("id")=="prev-page"){
+    	// if already  on first page - do nothing
+    	if(currentPage == 0){
+    		return
+    	}
+    	//else go to prev page
+      else{
+      	currentPage = parseInt(currentPage) - 1;
+      }
+    }
+
+    else if ($(this).attr("id")=="next-page"){
+    	// if already on last page - do nothing
+    	if(currentPage == numPages - 1){
+    		return;
+    	}
+    	//else go to next page
+    	else{
+      	currentPage = parseInt(currentPage) + 1;
+    	}
+    }
+
+    //if one of the page numbers was clicked
+    else{
+    	// if click on the current page - do nothing
+    	if (currentPage == $(this).attr("data-number")){
+    		return;
+    	}
+    	else{
+    	currentPage = $(this).attr("data-number");
+    	}
+    }
 
 		console.log("currentPage " + currentPage)
 
 		$(".pop-up-event").remove();
-
-
 
 		// // console.log(($(this).val) + "this.val()")
 		page = "&page=" + currentPage
@@ -861,8 +901,8 @@ $(document).ready(function(){
 		// remove active class from all page numbers 
 		//(this way we don't have to determine which page number was the last one clicked)
 		$(".page-item").removeClass("active");
-		//add class "active" to the page numebr clicked
-		$(this).addClass("active");
+		//add class "active" to the page number clicked
+		$("#page-" + (parseInt(currentPage) + 1)).addClass("active");
 		queryUrl = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + zipCode + city + state + radius+  keyword + classificationName + size + page;
 
 		//ajaxCall with the new page number in queryUrl
