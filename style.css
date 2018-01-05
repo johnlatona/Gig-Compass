@@ -402,6 +402,17 @@ nav a:link{
 	width: 13vw;
 }
 
+.material-tooltip {
+    display: none !important;
+  }
+
+ .backdrop{
+	display: none;
+}
+
+
+/*media queries*/
+
 @media only screen and (max-width: 1300px) {
 
 	.pop-up-event {
@@ -601,6 +612,9 @@ nav a:link{
 		width: 90%;
 	}
 
+	.material-tooltip {
+    	display: block !important;
+  	}
 }
 
 
