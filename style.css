@@ -242,6 +242,7 @@ nav a:link{
 	border: 1px solid #000000;
 	background-color: rgb(255, 255, 255);
 	padding: 0;
+	overflow: scroll;
 }
 
 .pop-up-content {
