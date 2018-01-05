@@ -236,7 +236,7 @@ nav a:link{
 .pop-up-event {
 	position: fixed;
 	width: 49.7%;
-	top: 14.2vh;
+	top: 7vw;
 	bottom: 9vh;
 	z-index: 10;
 	border: 1px solid #000000;
@@ -518,7 +518,7 @@ nav a:link{
 
   	.pop-up-event {
   		width: 49.5%;
-		top: 10.7vh;
+		top: 6.9vw;
 		bottom: 9.4vh;
   	}
 }
@@ -605,11 +605,13 @@ nav a:link{
 	}
 
 	.image-display {
+		margin-top: 2vw;
 		width: 250px;
 		height: 150px;
 	}
 
 	.pop-up-event {
+		margin-top: 4vw;
 		width: 90%;
 	}
 /*
@@ -784,6 +786,7 @@ nav a:link{
 	}
 
 	.image-display {
+		margin-top: 3vw;
   		width: 150px;
   		height: 100px;
   	}
@@ -842,6 +845,7 @@ nav a:link{
 	}
 
 	.pop-up-event {
+		margin-top: 8vw;
 		height: 80%;
 	}
 
@@ -916,6 +920,7 @@ nav a:link{
   	}
 
   	.pop-up-event {
+  		margin-top: 14vw;
 		height: 80%;
 	}
 
