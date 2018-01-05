@@ -513,16 +513,16 @@ $(document).ready(function(){
 						firstRow.addClass("row");
 						firstRow.attr("id", "pop-up-header");
 						var firstRowColOne = $("<div>");
-						firstRowColOne.addClass("col-xs-11");
+						firstRowColOne.addClass("col-xs-9 col-sm-11");
 						var popUpHeading = $("<h3>");
 						popUpHeading.text(events[m].name);
-						var expandedEventDateTime = $("<p>");
+						var expandedEventDateTime = $('<p id="expanded-date">');
 						expandedEventDateTime.text(moment(events[m].dates.start.localDate).format("dddd, MMMM Do, YYYY") + " at " + moment(convertedTime).format("h:mm A"));
 						firstRowColOne.append(popUpHeading, expandedEventDateTime);
 						var firstRowColTwo = $("<div>");
-						firstRowColTwo.addClass("col-xs-1");
+						firstRowColTwo.addClass("col-xs-3 col-sm-1");
 						var closeButton = $("<button>");
-						closeButton.addClass("waves-effect waves-green btn-flat close-button col-xs-1");
+						closeButton.addClass("waves-effect waves-green btn-flat close-button");
 						closeButton.text("X");
 						firstRowColTwo.append(closeButton);
 						firstRow.append(firstRowColOne, firstRowColTwo);
@@ -530,13 +530,13 @@ $(document).ready(function(){
 						var secondRow = $("<div>");
 						secondRow.addClass("row");
 						var secondRowColOne = $("<div>");
-						secondRowColOne.addClass("col-xs-7");
+						secondRowColOne.addClass("col-xs-12 col-sm-7");
 						var popUpImg = $('<img src="' + events[m].images[2].url + '" alt="' + events[m].name + '" class="pop-up-img">');
 						secondRowColOne.append(popUpImg);
 						var secondRowColTwo = $("<div>");
-						secondRowColTwo.addClass("col-xs-5");
-						secondRowColTwo.html('<h5>' + events[m]._embedded.venues[0].name + "</h5><br><h6>Address:</h6><p>" + events[m]._embedded.venues[0].address.line1 + "</p><p>" + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + " " +
-						events[m]._embedded.venues[0].postalCode + "</p>");
+						secondRowColTwo.addClass("col-xs-12 col-sm-5");
+						secondRowColTwo.html('<h5 id="venue-name">' + events[m]._embedded.venues[0].name + '</h5><h6 id="address">Address:</h6><p id="address-line-one">' + events[m]._embedded.venues[0].address.line1 + '</p><p id="address-line-two">' + events[m]._embedded.venues[0].city.name + ", " + events[m]._embedded.venues[0].state.stateCode + '' +
+						events[m]._embedded.venues[0].postalCode + '</p>');
 						secondRow.append(secondRowColOne, secondRowColTwo);
 						//third row content pop up: purchase tickets button
 						var thirdRow = $("<div>")

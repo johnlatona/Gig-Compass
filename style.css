@@ -60,10 +60,6 @@ hr {
 	z-index: 0;
 }
 
-#event-map {
-	height: 10vw;
-}
-
 #row {
 	padding: 0;
 	margin: 0;
@@ -239,9 +235,9 @@ nav a:link{
 
 .pop-up-event {
 	position: fixed;
-	width: 50%;
-	top: 13.6vh;
-	bottom: 8.8vh;
+	width: 49.7%;
+	top: 14.2vh;
+	bottom: 9vh;
 	z-index: 10;
 	border: 1px solid #000000;
 	background-color: rgb(255, 255, 255);
@@ -483,8 +479,47 @@ nav a:link{
 
 	.image-display {
 		width: 170px;
+		height: 120px;
 	}
 
+	#map {
+		margin-top: 1.8%;
+		height: 80vh;
+	}
+
+	#event-list {
+		position: relative;
+		margin-bottom: 8vw;
+		margin-top: 1vw;
+	}
+
+	h5, h6, p {
+		margin-left: 50px;
+	}
+
+	p {
+		font-size: 1vw;
+	}
+
+	#venue-name, #address, #address-line-one, #address-line-two {
+  		margin-left: 0;
+  		margin-bottom: 0;
+  	}
+
+  	#expanded-date {
+  		margin-left: 0;
+  	}
+
+  	#address {
+  		margin-top: 10px;
+  		margin-bottom: 10px;
+  	}
+
+  	.pop-up-event {
+  		width: 49.5%;
+		top: 10.7vh;
+		bottom: 9.4vh;
+  	}
 }
 
 
@@ -550,10 +585,36 @@ nav a:link{
 		padding-left: 2vw
 	}
 
+	#map {
+		position: static;
+		width: 95%;
+		margin-top: 0;
+		margin-left: 2.5%;
+		margin-right: 2.5%;
+		margin-bottom: 10%;
+	}
+
+	#map-column {
+		position: static;
+		margin-top: 0;
+	}
+
+	#event-list {
+		margin-bottom: 10px;
+	}
+
+	.image-display {
+		width: 250px;
+		height: 150px;
+	}
+
+	.pop-up-event {
+		width: 90%;
+	}
+
 	.material-tooltip {
     	display: block !important;
   	}
-
 }
 
 
@@ -594,6 +655,11 @@ nav a:link{
 	#modal-location,
 	#modal-daterange{
 		top: 56px !important;
+	}
+
+	.image-display {
+		width: 150px;
+		height: 80px;
 	}
 
 
@@ -692,13 +758,10 @@ nav a:link{
   		font-size:12px;
   	}
 
-  	.image-display {
-  		width: 80px;
-  		height: 80px;
-  	}
-
   	.pop-up-img {
-  		width: 200px;
+  		width: 70%;
+  		margin-left: 15%;
+
   	}
 
   	p {
@@ -706,19 +769,51 @@ nav a:link{
 	}
 
 	h5 {
-		font-size: 3vw;
+		font-size: 3.5vw;
 	}
 
 	h6 {
 		font-size: 2vw;
 	}
 
+	h3 {
+		font-size: 16px;
+	}
+
 	.image-display {
-  		width: 110px;
+  		width: 150px;
+  		height: 100px;
+  	}
+
+  	#venue-name, #address, #address-line-one, #address-line-two #expanded-date {
+  		margin-left: 0;
+  		margin-bottom: 0;
+  	}
+
+  	#expanded-date {
+  		font-size: 11px;
+  	}
+
+  	#address-line-one {
+  		margin-top: 10px;
+  		font-size: 11px;
+  	}
+
+  	#address-line-two {
+  		font-size: 11px;
+  	}
+
+  	#address {
+  		font-size: 14px;
+  	}
+
+  	#venue-name {
+  		font-size: 16px;
+  		text-align: center;
   	}
 
   	.purchase-button {
-  		height: 60px;
+  		height: 50px;
   		font-size: 20px;
   	}
 
@@ -729,6 +824,31 @@ nav a:link{
   	.next-button {
   		font-size: 10px;
   	}
+
+  	.close-button {
+  		margin-left: 40px;
+  		height: 20px;
+  	}
+
+  	#map {
+		width: 92%;
+		margin-top: 0;
+		margin-left: 4%;
+		margin-right: 4%;
+		margin-bottom: 15%;
+	}
+
+	.pop-up-event {
+		height: 75%;
+	}
+
+	a {
+		font-size: 16px !important;
+	}
+
+	p {
+		font-size: 11px;
+	}
 
 
   }
@@ -760,6 +880,10 @@ nav a:link{
   	
   	}
 
+  	#map {
+  		margin-bottom: 20%;
+  	}
+
   	
 
   	}
@@ -788,17 +912,19 @@ nav a:link{
   	
   	}
 
+  	.pop-up-event {
+		height: 70%;
+	}
+
   	.event {
   		padding: 0;
   		margin: 0;
   	}
 
   	.image-display {
-  		width: 90px;
-  	}
-
-  	.pop-up-img {
-  		width: 150px;
+  		margin-top: 20px;
+  		width: 110px;
+  		height: 75px;
   	}
 
   	.purchase-button {
@@ -815,5 +941,17 @@ nav a:link{
   		padding: 5px;
   	}
 
+  	a {
+		font-size: 8px !important;
+	}
+
+	#map {
+  		margin-bottom: 25%;
+  	}
+
+  	.par-display, .name-display {
+  		margin-left: 30px;
+  		margin-top: 20px;
+  	}
 }
 
