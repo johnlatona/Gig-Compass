@@ -380,6 +380,10 @@ nav a:link{
 	z-index: 3;
 }
 
+.error-msg {
+	margin-top: 3.5vw;
+}
+
 .error-pop-up-row {
 	position: fixed;
 	left: 0;
@@ -521,6 +525,11 @@ nav a:link{
 		top: 6.9vw;
 		bottom: 9.4vh;
   	}
+
+  	.error-msg {
+  		margin-left: 2vw;
+  		margin-top: 3vw;
+  	}
 }
 
 
@@ -614,6 +623,15 @@ nav a:link{
 		margin-top: 4vw;
 		width: 90%;
 	}
+
+	.error-pop-up {
+		height: 20%;
+	}
+
+	.error-msg {
+  		margin-left: 2vw;
+  		margin-top: 6vw;
+  	}
 /*
 	.material-tooltip {
     	display: block !important;
@@ -857,42 +875,51 @@ nav a:link{
 		font-size: 11px;
 	}
 
+	.error-pop-up {
+		height: 20%;
+		padding-top: 20px;
+		margin-top: 10vw;
+	}
+
+	.error-msg{
+		margin: 0;
+		margin-top: 6vw;
+	}
+
 
   }
 
 
 
   	@media only screen and (max-width: 375px) {
-
-  		 		
-  		
-
-		
-  	#modal-categories {
+	 		
+  		#modal-categories {
   		left: 55%;
   		width: 35% !important; 
   	
-  	}
+  		}
 
-  	#modal-location {
-  		left: 55%;
-  		width: 40% !important ;
+  		#modal-location {
+  			left: 55%;
+  			width: 40% !important ;
   		
-  	}
+  		}
   	
 
-  	#modal-daterange {
-  		left: 52%;
-  		width: 47% !important; 
+  		#modal-daterange {
+  			left: 52%;
+  			width: 47% !important; 
   	
-  	}
+  		}
 
-  	#map {
-  		margin-bottom: 20%;
-  	}
+  		#map {
+  			margin-bottom: 20%;
+  		}
 
-  	
-
+	  	.error-msg{
+			margin: 0;
+			margin-top: 6vw;
+		}
   	}
 
 

@@ -98,6 +98,7 @@ $(document).ready(function(){
 		$(".error-content").html(errorMessage);
 		$("#map").hide();
 		$(".pagination").empty();
+		$(".background-opacity").fadeIn("fast");
 	}
 
 	function errorCallDate(errorMessage) {
@@ -399,7 +400,7 @@ $(document).ready(function(){
 				console.log("-----------------------");
 
 				if(json.page.totalElements === 0) {
-					var msg = "<h5>Sorry!...We couldn't find any events that match what you're looking for.</h5><br><h5>Please try another search.</h5>";
+					var msg = '<h5 class="error-msg">Sorry!...We could not find any matching events. </h5><br><h5 class="error-msg">Please try another search.</h5>';
 
 					errorCall(msg);
 					
@@ -817,7 +818,7 @@ $(document).ready(function(){
 		setSearchParameters();
 
 		if (!isDateRangeValid()) {
-			errorCallDate("<h5>Please enter a valid date range</h5>");
+			errorCallDate('<h5 class="error-msg">Please enter a valid date range</h5>');
 			return false;
 		}
 
