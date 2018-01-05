@@ -381,7 +381,7 @@ nav a:link{
 }
 
 .error-msg {
-	margin-top: 3.5vw;
+	margin-top: 1.5vw;
 }
 
 .error-pop-up-row {
@@ -528,7 +528,7 @@ nav a:link{
 
   	.error-msg {
   		margin-left: 2vw;
-  		margin-top: 3vw;
+  		margin-top: 1.5vw;
   	}
 }
 
@@ -630,7 +630,7 @@ nav a:link{
 
 	.error-msg {
   		margin-left: 2vw;
-  		margin-top: 6vw;
+  		margin-top: 3vw;
   	}
 /*
 	.material-tooltip {

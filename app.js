@@ -400,7 +400,7 @@ $(document).ready(function(){
 				console.log("-----------------------");
 
 				if(json.page.totalElements === 0) {
-					var msg = '<h5 class="error-msg">Sorry!...We could not find any matching events. </h5><br><h5 class="error-msg">Please try another search.</h5>';
+					var msg = '<h5 class="error-msg">Sorry!...We could not find any matching events.</h5><h5 class="error-msg">Please try another search.</h5>';
 
 					errorCall(msg);
 					
