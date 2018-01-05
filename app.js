@@ -97,6 +97,7 @@ $(document).ready(function(){
 		$(".error-pop-up-row").fadeIn("fast");
 		$(".error-content").html(errorMessage);
 		$("#map").hide();
+		$(".pagination").empty();
 	}
 
 	function errorCallDate(errorMessage) {
