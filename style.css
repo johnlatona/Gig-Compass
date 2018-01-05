@@ -471,9 +471,15 @@ nav a:link{
 	}
 
 	.image-display {
-		width: 170px;
+		/*width: 170px;*/
 	}
 
+}
+
+@media only screen and (max-width: 990px) {
+	.image-display{
+		width:170px;
+	}
 }
 
 
